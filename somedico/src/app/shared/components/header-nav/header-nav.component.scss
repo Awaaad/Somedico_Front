@@ -1,0 +1,9 @@
+.router-links-right {
+    a {
+        color: black;
+        text-decoration: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
