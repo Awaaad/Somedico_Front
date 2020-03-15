@@ -1,9 +1,31 @@
 .router-links-right {
-    a {
-        color: black;
-        text-decoration: none;
+    display: flex;
+    align-items: center;
+
+    .header-logo {
+        width: 35px;
+        padding-right: 10px;
+        padding-top: 2px;
+
         &:hover {
             cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    h3 {
+        color: black;
+        text-decoration: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
         }
     }
 }
