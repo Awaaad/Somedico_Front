@@ -24,3 +24,42 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+ion-buttons {
+    ion-menu-button {
+        color: black !important;
+    }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+
+    .header-logo {
+        width: 35px;
+        padding-right: 10px;
+        padding-top: 2px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    h3 {
+        color: black;
+        text-decoration: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

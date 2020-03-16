@@ -1,9 +1,9 @@
-<ng-container>
+<ng-container *ngIf="false">
   <ion-app>
     <ion-header>
       <ion-toolbar>
         <ion-title>
-          <div class="router-links"> 
+          <div class="router-links">
             <div class="router-links-right">
               <img class="header-logo" routerLink="/home" src='../../../../assets/icon/pharmacy.png'>
               <h3 class="header-nav-home" routerLink="/home">Somedico</h3>
@@ -21,3 +21,40 @@
     </div>
   </ion-app>
 </ng-container>
+
+
+<ion-split-pane  when="(min-width: 10000px)" *ngIf="true" contentId="menu-content">
+  <ion-menu contentId="menu-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button autoHide='false'></ion-menu-button>
+        </ion-buttons>
+        <div class="header-section">
+          <img class="menu-logo" src='../../../assets/img/recruitix_logo.png' width="175px">
+          <a *ngIf="true" routerLink="/login">Login</a>
+        </div>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list class="ion-no-padding">
+        <div class="side-nav">
+          <ul id="myUL">
+            <div *ngIf="true" class="HR">
+              <li>
+                <a routerLink="/dashboard">Dashboard</a>
+              </li>
+              <li>
+                <a routerLink="/venue-bo">Venue</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="menu-content">
+  </ion-router-outlet>
+</ion-split-pane>
