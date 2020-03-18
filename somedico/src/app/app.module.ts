@@ -13,6 +13,9 @@ import { HeaderNavComponent } from '../app/shared/components/header-nav/header-n
 import { SideNavComponent } from '../app/shared/components/side-nav/side-nav.component';
 import { FooterComponent } from '../app/shared/components/footer/footer.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiService } from './services/api.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,10 +24,16 @@ import { FooterComponent } from '../app/shared/components/footer/footer.componen
     FooterComponent
   ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
+    ApiService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
