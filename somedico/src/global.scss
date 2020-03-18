@@ -25,6 +25,18 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* Custom CSS */
+@import "./app/shared/styles/common.scss";
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800&display=swap" rel="stylesheet');
+
+:root {
+    --ion-color-secondary: #008413;
+    --ion-color-secondary-rgb: 0, 102, 0;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #005a00;
+    --ion-color-secondary-tint: #1a751a;
+}
 
 ion-buttons {
     ion-menu-button {
@@ -37,7 +49,7 @@ ion-buttons {
     align-items: center;
 
     .header-logo {
-        width: 35px;
+        width: 45px;
         padding-right: 10px;
         padding-top: 2px;
 
@@ -51,7 +63,8 @@ ion-buttons {
     }
 
     h3 {
-        color: black;
+        margin-top: 10px;
+
         text-decoration: none;
 
         &:hover {
@@ -61,5 +74,15 @@ ion-buttons {
         &:focus {
             outline: none;
         }
+    }
+}
+
+ion-title {
+    padding: 0;
+}
+
+.title {
+    .header-logo {
+        padding-top: 0;
     }
 }

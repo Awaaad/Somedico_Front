@@ -1,3 +1,5 @@
+@import '../../styles/common.scss';
+
 .router-links-right {
     display: flex;
     align-items: center;
@@ -28,4 +30,136 @@
             outline: none;
         }
     }
+}
+
+h3 {
+    margin-top: 10px !important;
+}
+
+.header-section {
+    display: flex;
+
+    h5 {
+        font-size: 20px;
+        padding-top: 4px;
+        margin: -4px;
+        margin-left: 3px;
+    }
+
+    a {
+        float: right;
+        text-decoration: none;
+        padding-left: 90px;
+        padding-top: 3px;
+        &:hover{
+            color: $color-dark-green;
+        }
+    }
+}
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        padding: 0 10px;
+
+        li {
+            list-style: none;
+            font-size: 18px;
+            color: $color-light-black;
+            margin: 0px 0 15px 0;
+            // padding: 10px 0;
+            cursor: pointer;
+
+            a {
+                // color: black;
+                text-decoration: none;
+
+                &:hover {
+                    color: $color-dark-green;
+                }
+            }
+        }
+    }
+
+    ul.nested {
+        padding: 0 30px;
+
+        &.active {
+            padding: 10px 30px;
+        }
+
+        li {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .nested {
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .caret {
+        cursor: pointer;
+    }
+
+    .caret:hover {
+        border-bottom: 2px solid $color-light-red;
+        width: 120%;
+        transition: 0.2s;
+    }
+
+    .caret::before {
+        background-image: "../../../assets/img/chevron-arrow-down.png";
+        width: 25px;
+        height: 25px;
+        color: $color-light-red;
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+    .caret-down::before {
+        transform: rotate(90deg);
+    }
+
+    li {
+        &:hover {
+            border-bottom: 2px solid $color-dark-green;
+            width: 90%;
+            transition: 0.2s;
+        }
+    }
+
+
+    a {
+        font-size: 18px;
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .subnav.active {
+        &:hover {
+            border: none;
+        }
+
+        li:first-child {
+            margin: 30px 0;
+        }
+    }
+}
+
+.split-pane-md.split-pane-visible>.split-pane-side {
+    max-width: 20%;
+}
+
+.menu-logo {
+    max-width: 120px;
 }

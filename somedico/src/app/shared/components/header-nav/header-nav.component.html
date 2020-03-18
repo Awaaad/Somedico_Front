@@ -31,30 +31,27 @@
           <ion-menu-button autoHide='false'></ion-menu-button>
         </ion-buttons>
         <div class="header-section">
-          <img class="menu-logo" src='../../../assets/img/recruitix_logo.png' width="175px">
+          <img class="menu-logo" src='../../../../assets/icon/pharmacy.png' width="22px">
+          <h5>Somedico</h5>
           <a *ngIf="true" routerLink="/login">Login</a>
         </div>
-
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list class="ion-no-padding">
         <div class="side-nav">
           <ul id="myUL">
-            <div *ngIf="true" class="HR">
-              <li>
-                <a routerLink="/dashboard">Dashboard</a>
-              </li>
-              <li>
-                <a routerLink="/venue-bo">Venue</a>
-              </li>
-            </div>
+            <li>
+              <a routerLink="/home">Dashboard</a>
+            </li>
+            <li>
+              <a routerLink="/products">Products</a>
+            </li>
           </ul>
         </div>
       </ion-list>
     </ion-content>
   </ion-menu>
-
-  <ion-router-outlet id="menu-content">
-  </ion-router-outlet>
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+  <app-footer></app-footer>
 </ion-split-pane>

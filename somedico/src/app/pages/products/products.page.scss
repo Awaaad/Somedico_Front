@@ -1,0 +1,156 @@
+@import '../../shared/styles/common.scss';
+$breakpoint-alpha: 480px;
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    .subtitle-logo {
+        padding-top: 10px;
+        max-width: 30px;
+    }
+
+    h5 {
+        padding-top: 10px;
+        padding-left: 5px;
+    }
+}
+
+.rwd-table {
+    margin: 1em 0;
+    // min-width: 300px; // adjust to your needs
+    width: 100%;
+    text-align: center;
+
+    tr {
+        font-size: 20px;
+        text-align: center !important;
+    }
+
+    td {
+        font-size: 17px;
+        text-align: center !important;
+        border-bottom: 2px solid $color-dark-green;
+    }
+
+
+    .th-left {
+        // border-left: 2px solid $color-light-black;
+    }
+    th {
+        display: none;
+        text-align: center !important;
+        border-bottom: 2px solid $color-light-black;
+        // border-right: 2px solid $color-light-black;
+        border-top: 2px solid $color-light-black;
+        color: black;
+        font-weight: 100;
+    }
+
+    .td-left{
+        // border-left: 2px solid $color-dark-green;
+    }
+    .Edit { 
+        // border-right: 3px solid $color-dark-green;
+    }
+    td {
+        display: block;
+        // border-right: 2px solid $color-dark-green;
+
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &:first-child {
+            padding-top: .5em;
+        }
+
+        &:last-child {
+            padding-bottom: .5em;
+        }
+
+        &:before {
+            content: attr(data-th)": ";
+            font-weight: bold;
+            width: 6.5em;
+            display: inline-block;
+
+            @media only screen and (max-width: 600px) {
+                width: initial;
+            }
+
+
+            @media (min-width: $breakpoint-alpha) {
+                display: none;
+            }
+        }
+    }
+
+    th,
+    td {
+        text-align: left;
+
+        @media (min-width: $breakpoint-alpha) {
+            display: table-cell;
+            padding: .25em .5em;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+
+    }
+
+
+}
+
+body {
+    padding: 0 2em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: $color-light-black;
+    background: $color-lighter-gray;
+}
+
+.rwd-table {
+    overflow: hidden;
+
+    th,
+    td {
+        margin: .5em 1em;
+
+        @media (min-width: $breakpoint-alpha) {
+            // padding: 1em !important;
+        }
+
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            width: 122px;
+        }
+    }
+}
+
+.Edit:hover {
+    cursor: pointer;
+    color: $color-dark-green;
+}
+
+.main-action{
+    padding:0;
+}
+.show-filter-btn {
+    float: right;
+    margin-top: 12px;
+}
+
+.router-links {
+    display: flex;
+    justify-content: space-between;
+    .add-button {
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+}

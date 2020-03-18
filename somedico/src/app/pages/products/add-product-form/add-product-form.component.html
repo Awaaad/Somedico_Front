@@ -1,0 +1,51 @@
+<form [formGroup]="addProductForm">
+  <div formArrayName="products" *ngFor="let product of productsFields.controls; let i = index">
+    <div [formGroupName]="i">
+      <ion-row>
+        <ion-col col-md-2>
+          <ion-item>
+            <!-- <ion-label position="floating" color="medium">Product Name</ion-label> -->
+            <ion-input formControlName="productName" placeholder="Product Name" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-md-2>
+          <ion-item>
+            <!-- <ion-label position="floating" color="medium">Product Name</ion-label> -->
+            <ion-input formControlName="dosage" placeholder="Dosage" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-md-2>
+          <ion-item>
+            <!-- <ion-label position="floating" color="medium">Category</ion-label> -->
+            <ion-input formControlName="category" placeholder="Category" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-md-2>
+          <ion-item>
+            <!-- <ion-label position="floating" color="medium">Quantity</ion-label> -->
+            <ion-input formControlName="quantity" placeholder="Quantity" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-md-2>
+          <ion-item>
+            <!-- <ion-label position="floating" color="medium">Price</ion-label> -->
+            <ion-input formControlName="price" placeholder="Price" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-md-2>
+          <ion-item>
+            <!-- <ion-label position="floating" color="medium">Status</ion-label> -->
+            <ion-input formControlName="status" placeholder="Status" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <div *ngIf="productsFields.length > 1" class="remove-item">
+          <ion-icon (click)="removeProduct(i)" class="delete-product-btn" name="trash"></ion-icon>
+        </div>
+      </ion-row>
+    </div>
+  </div>
+  <div class="action-button">
+    <ion-button (click)="addProduct()" class="add-product-btn" color="danger">Add Product</ion-button>
+    <ion-button class="submit-btn" color="secondary">Save</ion-button>
+  </div>
+</form>

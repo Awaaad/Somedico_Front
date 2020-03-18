@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsPage implements OnInit {
 
+  showFilter = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showOrHideFilter() {
+    this.showFilter = !this.showFilter;
   }
 
 }
