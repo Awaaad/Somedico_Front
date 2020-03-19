@@ -28,6 +28,8 @@
 /* Custom CSS */
 @import "./app/shared/styles/common.scss";
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800&display=swap" rel="stylesheet');
+@import '../../somedico/src/app/shared/styles/common.scss';
+$breakpoint-alpha: 480px;
 
 :root {
     --ion-color-secondary: #008413;
@@ -36,6 +38,13 @@
     --ion-color-secondary-contrast-rgb: 255, 255, 255;
     --ion-color-secondary-shade: #005a00;
     --ion-color-secondary-tint: #1a751a;
+
+    --ion-color-warning: #f39c12;
+    --ion-color-warning-rgb: 243,156,18;
+    --ion-color-warning-contrast: #ffffff;
+    --ion-color-warning-contrast-rgb: 255, 255, 255;
+    --ion-color-warning-shade: #d68910;
+    --ion-color-warning-tint: #f4a62a;
 }
 
 ion-buttons {
@@ -85,4 +94,138 @@ ion-title {
     .header-logo {
         padding-top: 0;
     }
+}
+
+
+// tables
+
+.rwd-table {
+    margin: 1em 0;
+    // min-width: 300px; // adjust to your needs
+    width: 100%;
+    text-align: center;
+
+    tr {
+        font-size: 20px;
+        text-align: center !important;
+    }
+
+    td {
+        font-size: 17px;
+        text-align: center !important;
+        border-bottom: 2px solid $color-dark-green;
+    }
+
+
+    .th-left {
+        // border-left: 2px solid $color-light-black;
+    }
+    th {
+        display: none;
+        text-align: center !important;
+        border-bottom: 2px solid $color-light-black;
+        // border-right: 2px solid $color-light-black;
+        border-top: 2px solid $color-light-black;
+        color: black;
+        font-weight: 100;
+    }
+
+    .td-left{
+        // border-left: 2px solid $color-dark-green;
+    }
+    .Edit { 
+        // border-right: 3px solid $color-dark-green;
+    }
+    td {
+        display: block;
+        // border-right: 2px solid $color-dark-green;
+
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &:first-child {
+            padding-top: .5em;
+        }
+
+        &:last-child {
+            padding-bottom: .5em;
+        }
+
+        &:before {
+            content: attr(data-th)": ";
+            font-weight: bold;
+            width: 6.5em;
+            display: inline-block;
+
+            @media only screen and (max-width: 600px) {
+                width: initial;
+            }
+
+
+            @media (min-width: $breakpoint-alpha) {
+                display: none;
+            }
+        }
+    }
+
+    th,
+    td {
+        text-align: left;
+
+        @media (min-width: $breakpoint-alpha) {
+            display: table-cell;
+            padding: .25em .5em;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+
+    }
+
+
+}
+
+body {
+    padding: 0 2em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: $color-light-black;
+    background: $color-lighter-gray;
+}
+
+.rwd-table {
+    overflow: hidden;
+
+    th,
+    td {
+        margin: .5em 1em;
+
+        @media (min-width: $breakpoint-alpha) {
+            // padding: 1em !important;
+        }
+
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            width: 122px;
+        }
+    }
+}
+
+// remove arrow from input type number
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

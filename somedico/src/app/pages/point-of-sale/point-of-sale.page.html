@@ -26,4 +26,51 @@
       </div>
     </ion-col>
   </ion-row>
+  <ion-card>
+    <ion-card-content>
+      <div class="wrapper-content">
+        <table class="rwd-table">
+          <tr>
+            <th>Product Name</th>
+            <th>Dosage</th>
+            <th>Category</th>
+            <th>Quantity (in stock)</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+          <tr class="table-content">
+            <td data-th="Product Name">Panadol</td>
+            <td data-th="Dosage">10ml</td>
+            <td data-th="Category">Pain Killer</td>
+            <td data-th="Quantity">10</td>
+            <td data-th="Price">100.00</td>
+            <td data-th="Quantity">
+              <input class="input-number" type="number">
+            </td>
+            <td data-th="Total">
+              100.00
+            </td>
+            <td class="delete-item" data-th="Delete">
+              <ion-icon class="delete-product-btn" name="trash"></ion-icon>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="wrapper-bottom">
+        <div class="sub-total">
+          Sub Total: Rs 100.00
+        </div>
+        <div class="action-btn">
+          <div class="new-purchase">
+            <ion-button class="new-purchase-btn" color="warning">New Sale</ion-button>
+          </div>
+          <div class="make-purchase">
+            <ion-button class="make-purchase-btn" color="secondary">Complete Sale</ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
