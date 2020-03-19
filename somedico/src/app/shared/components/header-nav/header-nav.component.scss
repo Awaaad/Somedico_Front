@@ -51,7 +51,8 @@ h3 {
         text-decoration: none;
         padding-left: 90px;
         padding-top: 3px;
-        &:hover{
+
+        &:hover {
             color: $color-dark-green;
         }
     }
@@ -68,12 +69,14 @@ h3 {
             list-style: none;
             font-size: 18px;
             color: $color-light-black;
-            margin: 0px 0 15px 0;
+            margin: 0px 0 25px 0;
             // padding: 10px 0;
             cursor: pointer;
 
             a {
                 // color: black;
+                display: flex;
+                justify-content: flex-start;
                 text-decoration: none;
 
                 &:hover {
@@ -162,4 +165,9 @@ h3 {
 
 .menu-logo {
     max-width: 120px;
+}
+
+ion-icon {
+    padding-top: 1px;
+    padding-right: 10px;
 }

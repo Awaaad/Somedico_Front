@@ -1,5 +1,3 @@
-import { ObjectUnsubscribedErrorCtor } from 'rxjs/internal/util/ObjectUnsubscribedError';
-
 export class ProductDto {
     productId: number;
     productName: string;

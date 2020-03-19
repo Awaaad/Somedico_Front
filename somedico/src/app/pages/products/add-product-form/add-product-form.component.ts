@@ -43,4 +43,10 @@ export class AddProductFormComponent implements OnInit {
   get productsFields() {
     return this.addProductForm ? this.addProductForm.get('products') as FormArray : null;
   }
+
+  save() {
+    this.addProductForm.reset();
+    (this.addProductForm.get('products') as FormArray).clear();
+    // console.log(this.addProductForm.get('products') as FormArray);
+  }
 }
