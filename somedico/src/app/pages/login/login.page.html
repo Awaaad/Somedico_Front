@@ -6,10 +6,60 @@
     <ion-title>
       <div class="router-links">
         <div class="title">
-          <img class="header-logo" routerLink="/home" src='../../../assets/icon/pharmacy.png'>
+          <img class="header-logo" routerLink="/home" src='../../../assets/header_icons/login.png'>
           <h3 class="header-nav-home" routerLink="/home">Login</h3>
         </div>
       </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <div class="login-container">
+    <div class="login-wrapper">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <div class="login-header">
+          <img class="cross-logo" src='../../../assets/icon/pharmacy.png'>
+          <h3 class="somedico-text">SOMEDICO PHARMACY</h3>
+        </div>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-center login-sub-container">
+        <ion-col size="8" size-md size="12" size-sm>
+          <div class="login-content__img">
+            <img src='../../../assets/pharmacy-login/drugs_1.png'>
+          </div>
+        </ion-col>
+        <ion-col size="4" size-md size="12" size-sm>
+          <ion-card class="login-card ion-no-margin">
+            <ion-card-header class="ion-text-center ion-no-padding">
+              <h3>Sign in</h3>
+            </ion-card-header>
+          <form>
+            <ion-card-content>
+              <div class="login-content__field">
+                <ion-item class="login-content__input">
+                  <ion-label position="floating" color="danger-shade">Username</ion-label>
+                  <ion-input type="text" ></ion-input>
+                </ion-item>
+  
+      
+  
+                <ion-item class="login-content__input">
+                  <ion-label position="floating">Password</ion-label>
+                  <ion-input type="password"></ion-input>
+                </ion-item>
+  
+  
+                <ion-row center>
+                  <ion-col class="ion-text-center ion-padding">
+                    <ion-button type="submit" color="secondary">Log In</ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-card-content>
+          </form>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

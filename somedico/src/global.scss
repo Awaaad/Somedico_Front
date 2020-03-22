@@ -40,11 +40,27 @@ $breakpoint-alpha: 480px;
     --ion-color-secondary-tint: #1a751a;
 
     --ion-color-warning: #f39c12;
-    --ion-color-warning-rgb: 243,156,18;
+    --ion-color-warning-rgb: 243, 156, 18;
     --ion-color-warning-contrast: #ffffff;
     --ion-color-warning-contrast-rgb: 255, 255, 255;
     --ion-color-warning-shade: #d68910;
     --ion-color-warning-tint: #f4a62a;
+
+    --ion-color-calculator: #1e3799;
+    --ion-color-calculator-rgb: 30, 55, 153;
+    --ion-color-calculator-contrast: #ffffff;
+    --ion-color-calculator-contrast-rgb: 255, 255, 255;
+    --ion-color-calculator-shade: #1a3087;
+    --ion-color-calculator-tint: #354ba3;
+}
+
+.ion-color-calculator {
+    --ion-color-base: var(--ion-color-calculator);
+    --ion-color-base-rgb: var(--ion-color-calculator-rgb);
+    --ion-color-contrast: var(--ion-color-calculator-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-calculator-contrast-rgb);
+    --ion-color-shade: var(--ion-color-calculator-shade);
+    --ion-color-tint: var(--ion-color-calculator-tint);
 }
 
 ion-buttons {
@@ -108,18 +124,27 @@ ion-title {
     tr {
         font-size: 20px;
         text-align: center !important;
+
+        @media only screen and (max-width: 1024px) {
+            font-size: 16px;
+        }
     }
 
     td {
-        font-size: 17px;
+        font-size: 18px;
         text-align: center !important;
         border-bottom: 2px solid $color-dark-green;
+
+        @media only screen and (max-width: 1024px) {
+            font-size: 15px !important;
+        }
     }
 
 
     .th-left {
         // border-left: 2px solid $color-light-black;
     }
+
     th {
         display: none;
         text-align: center !important;
@@ -128,14 +153,17 @@ ion-title {
         border-top: 2px solid $color-light-black;
         color: black;
         font-weight: 100;
+        // white-space: nowrap;
     }
 
-    .td-left{
+    .td-left {
         // border-left: 2px solid $color-dark-green;
     }
-    .Edit { 
+
+    .Edit {
         // border-right: 3px solid $color-dark-green;
     }
+
     td {
         display: block;
         // border-right: 2px solid $color-dark-green;
@@ -211,9 +239,9 @@ body {
             // padding: 1em !important;
         }
 
-        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-            width: 122px;
-        }
+        // @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        //     width: 10px;
+        // }
     }
 }
 
@@ -221,11 +249,24 @@ body {
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+ion-button {
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+
+    @media only screen and (max-width: 1024px) {
+        font-size: 15px;
+    }
+}
+
+.add-btn {
+    font-size: 15px;
 }

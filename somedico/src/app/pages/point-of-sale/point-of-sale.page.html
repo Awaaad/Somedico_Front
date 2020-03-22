@@ -20,35 +20,82 @@
       <div class="search-container">
         <ion-searchbar placeholder="Search..." type="text" #lastName></ion-searchbar>
       </div>
+      <div class="search-result-container">
+
+      </div>
     </ion-col>
     <ion-col size="6">
       <div class="filters">
+        
       </div>
     </ion-col>
   </ion-row>
+  <!-- Search Result -->
+    <div class="search-result wrapper-content">
+      <table class="rwd-table">
+        <tr>
+          <th>Product Name</th>
+          <th>Dosage</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Price (per box)</th>
+          <th>Price (per unit)</th>
+          <th></th>
+        </tr>
+        <tr class="table-content">
+          <td data-th="Product Name">Panadol</td>
+          <td data-th="Dosage">10ml</td>
+          <td data-th="Category">Pain Killer</td>
+          <td data-th="Quantity">12 </td>
+          <td data-th="PriceBox">100.00</td>
+          <td data-th="PriceUnit">10.00</td>
+          <td class="add" data-th="Add">
+            <ion-button class="add-btn" color='danger'>
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </td>
+        </tr>
+      </table>
+    </div>
   <ion-card>
+    <!-- Cart -->
     <ion-card-content>
+      <div class="subtitle">
+        <img class="cart-logo" src='../../../assets/icon/cart.png'>
+        <h3 class="cart-text">Cart</h3>
+      </div>
       <div class="wrapper-content">
         <table class="rwd-table">
           <tr>
             <th>Product Name</th>
             <th>Dosage</th>
-            <th>Category</th>
-            <th>Quantity (in stock)</th>
-            <th>Price</th>
+            <th>Slot</th>
+            <!-- <th>Category</th> -->
             <th>Quantity</th>
+            <th>Price (per box)</th>
+            <th>Box</th>
+            <th>Price (per unit)</th>
+            <th>Unit</th>
             <th>Total</th>
             <th></th>
           </tr>
           <tr class="table-content">
             <td data-th="Product Name">Panadol</td>
             <td data-th="Dosage">10ml</td>
-            <td data-th="Category">Pain Killer</td>
-            <td data-th="Quantity">10</td>
-            <td data-th="Price">100.00</td>
-            <td data-th="Quantity">
+            <td data-th="Slot">A1</td>
+            <!-- <td data-th="Category">Pain Killer</td> -->
+            <td data-th="QuantityInStock">12</td>
+            <td data-th="PriceBox">100.00</td>
+            <td data-th="Box">
               <input class="input-number" type="number">
             </td>
+            <td data-th="PriceUnit">10.00</td>
+            <td data-th="PriceUnit">
+              <input class="input-number" type="number">
+            </td>
+            <!-- <td data-th="Quantity">
+              <input class="input-number" type="number">
+            </td> -->
             <td data-th="Total">
               100.00
             </td>
@@ -73,4 +120,38 @@
       </div>
     </ion-card-content>
   </ion-card>
+
+  <ion-row>
+    <ion-col size="6">
+
+    </ion-col>
+    <ion-col size="6">
+      <!-- calculator -->
+      <ion-row class="calculator-row">
+        <ion-col size="8">
+          <ion-card class="quick-balance">
+            <ion-card-content>
+              <h3>Paid:<input class="input-number balance calculator-paid" type="number"></h3>
+              <h3>Sub Total: <span class="balance calculator-subtotal">100.00</span></h3>
+              <h3>Balance: <span class="balance calculator-balance">100.00</span></h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="4">
+          <ion-card class="calculator">
+            <ion-card-content>
+                <ion-item>
+                  <ion-label class="value">
+                    {{value}}
+                  </ion-label>
+                </ion-item>
+                <div *ngFor="let numGroup of numberGroups">
+                  <ion-button color="secondary" *ngFor="let num of numGroup" (click)="onButtonPress(num)" class="calc-button">{{num}}</ion-button>
+                </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
 </ion-content>

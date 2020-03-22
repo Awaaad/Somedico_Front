@@ -1,34 +1,147 @@
+@import '../../shared/styles/common.scss';
+
 .title .header-logo {
     padding-bottom: 7px;
 }
-td, th {
-    text-align: left!important;
+
+td,
+th {
+    text-align: left !important;
 }
+
 .input-number {
     border-radius: 4px;
     width: 75px;
+
+    &:focus {
+        outline-color: $color-dark-green;
+    }
 }
+
 .rwd-table td {
     border-bottom: none;
 }
-ion-icon {
+
+ion-icon.delete-product-btn {
     padding-top: 10px;
 }
+
 .delete-item:hover {
     cursor: pointer;
     color: red;
 }
+
 .sub-total {
     font-size: 20px;
     color: red;
+    @media only screen and (max-width: 1024px) {
+        font-size: 17px;
+    }
 }
+
 .wrapper-bottom {
     display: flex;
     justify-content: space-between;
 }
+
 .action-btn {
     display: flex;
+
     .new-purchase {
         padding-right: 15px;
+    }
+}
+
+.search-result {
+    padding: 0 15px 10px 15px;
+}
+
+td.add {
+    text-align: right !important;
+}
+
+.subtitle {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+
+    .cart-logo {
+        width: 40px;
+    }
+
+    .cart-text {
+        font-size: 30px;
+        padding-top: 8px;
+        margin-top: 11px;
+        padding-left: 5px;
+    }
+}
+
+
+.value {
+    text-align: right;
+    font-size: 20px;
+}
+
+.calc-button {
+    width: calc(25% - 4px);
+    height: 50px;
+    font-size: 20px;
+    @media only screen and (max-width: 1024px) {
+        font-size: 15px;
+    }
+}
+
+.calculator {
+    width: 300px;
+    float: right;
+    margin: 0;
+}
+
+.calculators-wrapper {
+    display: flex;
+}
+
+.quick-balance {
+    margin: 0;
+
+    ion-card-content {
+        h3 {
+            font-size: 20px;
+            padding: 10px;
+
+            @media only screen and (max-width: 1024px) {
+                font-size: 15px;
+            }
+
+            .balance {
+                float: right;
+            }
+
+            .calculator-paid {
+                width: 100px;
+            }
+
+            .calculator-balance,
+            .calculator-subtotal {
+                padding-right: 3px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .calculator-row {
+        display: block;
+
+        .calculator {
+            margin: 5px;
+        }
+
+        .quick-balance {
+            width: 300px;
+            margin: 5px;
+            float: right;
+        }
     }
 }

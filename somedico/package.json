@@ -25,6 +25,7 @@
     "@ionic/angular": "^5.0.0",
     "bootstrap-icons": "^1.0.0-alpha2",
     "core-js": "^2.5.4",
+    "ngx-calculator": "^1.0.8",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

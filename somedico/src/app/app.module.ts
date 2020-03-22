@@ -21,14 +21,14 @@ import { ApiService } from './services/api.service';
     AppComponent,
     HeaderNavComponent,
     SideNavComponent,
-    FooterComponent
+    FooterComponent,
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

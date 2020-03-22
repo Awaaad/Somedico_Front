@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { PointOfSalePageRoutingModule } from './point-of-sale-routing.module';
 
 import { PointOfSalePage } from './point-of-sale.page';
+import { CalculatorComponent } from '../../shared/components/calculator/calculator.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PointOfSalePageRoutingModule
+    PointOfSalePageRoutingModule,
   ],
-  declarations: [PointOfSalePage]
+  declarations: [
+    PointOfSalePage,
+    CalculatorComponent
+  ]
 })
 export class PointOfSalePageModule {}

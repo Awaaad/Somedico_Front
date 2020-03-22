@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { isNumber } from 'util';
 
 @Component({
-  selector: 'app-point-of-sale',
-  templateUrl: './point-of-sale.page.html',
-  styleUrls: ['./point-of-sale.page.scss'],
+  selector: 'app-calculator',
+  templateUrl: './calculator.component.html',
+  styleUrls: ['./calculator.component.scss'],
 })
-export class PointOfSalePage implements OnInit {
-
+export class CalculatorComponent  implements OnInit{
   value = '0';
   oldValue = '0';
 
@@ -20,9 +19,11 @@ export class PointOfSalePage implements OnInit {
     [0, 'c', '/', '=']
   ];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+
   }
 
   onButtonPress(symbol) {
