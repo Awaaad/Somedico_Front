@@ -14,7 +14,7 @@ th {
     width: 75px;
 
     &:focus {
-        outline-color: $color-dark-green;
+        outline-color: none;
     }
 }
 
@@ -34,7 +34,7 @@ ion-icon.delete-product-btn {
 .sub-total {
     font-size: 20px;
     color: red;
-    @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: 1300px) {
         font-size: 17px;
     }
 }
@@ -87,7 +87,7 @@ td.add {
     width: calc(25% - 4px);
     height: 50px;
     font-size: 20px;
-    @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: 1300px) {
         font-size: 15px;
     }
 }
@@ -110,7 +110,7 @@ td.add {
             font-size: 20px;
             padding: 10px;
 
-            @media only screen and (max-width: 1024px) {
+            @media only screen and (max-width: 13004px) {
                 font-size: 15px;
             }
 

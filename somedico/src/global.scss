@@ -125,7 +125,7 @@ ion-title {
         font-size: 20px;
         text-align: center !important;
 
-        @media only screen and (max-width: 1024px) {
+        @media only screen and (max-width: 1300px) {
             font-size: 16px;
         }
     }
@@ -135,7 +135,7 @@ ion-title {
         text-align: center !important;
         border-bottom: 2px solid $color-dark-green;
 
-        @media only screen and (max-width: 1024px) {
+        @media only screen and (max-width: 1300px) {
             font-size: 15px !important;
         }
     }
@@ -152,7 +152,7 @@ ion-title {
         // border-right: 2px solid $color-light-black;
         border-top: 2px solid $color-light-black;
         color: black;
-        font-weight: 100;
+        font-weight: 400;
         // white-space: nowrap;
     }
 
@@ -258,11 +258,15 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.input-number:focus {
+    outline: none;
+}
+
 ion-button {
     font-family: "Poppins", sans-serif;
     font-size: 20px;
 
-    @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: 1300px) {
         font-size: 15px;
     }
 }

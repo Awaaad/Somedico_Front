@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { PointOfSalePageRoutingModule } from './point-of-sale-routing.module';
 
 import { PointOfSalePage } from './point-of-sale.page';
-import { CalculatorComponent } from '../../shared/components/calculator/calculator.component';
 
 @NgModule({
   imports: [
@@ -17,8 +16,7 @@ import { CalculatorComponent } from '../../shared/components/calculator/calculat
     PointOfSalePageRoutingModule,
   ],
   declarations: [
-    PointOfSalePage,
-    CalculatorComponent
+    PointOfSalePage
   ]
 })
 export class PointOfSalePageModule {}
