@@ -2,42 +2,66 @@
   <div formArrayName="products" *ngFor="let product of productsFields.controls; let i = index">
     <div [formGroupName]="i">
       <ion-row>
-        <ion-col col-md-2>
+        <ion-col>
           <ion-item>
-            <!-- <ion-label position="floating" color="medium">Product Name</ion-label> -->
             <ion-input formControlName="productName" placeholder="Product Name" type="text"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-md-2>
+        <ion-col>
           <ion-item>
-            <!-- <ion-label position="floating" color="medium">Product Name</ion-label> -->
+            <ion-input formControlName="description" placeholder="Description" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
             <ion-input formControlName="dosage" placeholder="Dosage" type="text"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-md-2>
+        <ion-col>
           <ion-item>
-            <!-- <ion-label position="floating" color="medium">Category</ion-label> -->
             <ion-input formControlName="category" placeholder="Category" type="text"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-md-2>
+        <ion-col>
           <ion-item>
-            <!-- <ion-label position="floating" color="medium">Quantity</ion-label> -->
-            <ion-input formControlName="quantity" placeholder="Quantity" type="number"></ion-input>
+            <ion-input formControlName="box" placeholder="Box" type="number"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-md-2>
+        <ion-col>
           <ion-item>
-            <!-- <ion-label position="floating" color="medium">Price</ion-label> -->
-            <ion-input formControlName="price" placeholder="Price" type="number"></ion-input>
+            <ion-input formControlName="unitsPerBox" placeholder="Units Per Box" type="number"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col col-md-2>
+        <ion-col>
           <ion-item>
-            <!-- <ion-label position="floating" color="medium">Status</ion-label> -->
-            <ion-input formControlName="status" placeholder="Status" type="text"></ion-input>
+            <ion-input formControlName="unitsTotal" placeholder="Total Units" type="number"></ion-input>
           </ion-item>
         </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input formControlName="pricePerBox" placeholder="Price Per Box" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input formControlName="pricePerUnit" placeholder="Price Per Unit" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input formControlName="requirePrescription" placeholder="Require Prescription" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col formGroupName="supplier">
+          <ion-item>
+            <ion-input formControlName="supplierId" placeholder="Supplier Id" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <!-- <ion-col formGroupName="supplier">
+          <ion-item>
+            <ion-input formControlName="supplierName" placeholder="Supplier Name" type="text"></ion-input>
+          </ion-item>
+        </ion-col> -->
         <div *ngIf="productsFields.length > 1" class="remove-item">
           <ion-icon (click)="removeProduct(i)" class="delete-product-btn" name="trash"></ion-icon>
         </div>

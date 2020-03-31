@@ -10,7 +10,7 @@
           <h3 class="header-nav-products">Products</h3>
         </div>
         <div class="add-button">
-          <ion-button class="add-btn" color='danger'>
+          <ion-button class="add-btn" color='danger' (click)="scroll(target)">
             <ion-icon name="add"></ion-icon>
           </ion-button>
         </div>
@@ -22,7 +22,7 @@
   <ion-row>
     <ion-col size="6">
       <div class="search-container">
-        <ion-searchbar placeholder="Search..." type="text" #lastName></ion-searchbar>
+        <ion-searchbar placeholder="Search..." type="text" #productName (ionInput)="searchByProductName(productName.value)"></ion-searchbar>
       </div>
     </ion-col>
     <ion-col size="6">
@@ -36,26 +36,23 @@
   <ion-row *ngIf="showFilter" class="filter-section">
     <ion-col size="3" class="ion-padding">
       <ion-item class="venue-input">
-        <ion-label position="floating" color="medium">Filter Products by Category..</ion-label>
-        <ion-select interface="popover" class="ion-float-left">
-          <ion-select-option value='0' selected="selected">All</ion-select-option>
-          <ion-select-option>
-          </ion-select-option>
+        <ion-label position="floating" color="medium">Category</ion-label>
+        <ion-select (ionChange)="filterByCategory($event)" interface="popover" class="ion-float-left">
+          <ion-select-option value='All' selected="selected">All</ion-select-option>
+          <ion-select-option value='Test'>Test</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-col>
     <ion-col size="3" class="ion-padding">
       <ion-item class="venue-input">
-        <ion-label position="floating" color="medium">Filter Products by Quantity..</ion-label>
-        <ion-select interface="popover" class="ion-float-left">
+        <ion-label position="floating" color="medium">Supplier Name</ion-label>
+        <ion-select (ionChange)="filterBySupplierName($event)" interface="popover" class="ion-float-left">
           <ion-select-option value="All" selected="selected">All</ion-select-option>
-          <ion-select-option value="rejected">Rejected</ion-select-option>
-          <ion-select-option value="proceed-to-next-interview">Proceed to next interview</ion-select-option>
-          <ion-select-option value="accepted">Accepted</ion-select-option>
+          <ion-select-option value="Blight">Blight</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-col>
-    <ion-col size="3" class="ion-padding">
+    <!-- <ion-col size="3" class="ion-padding">
       <ion-item class="venue-input">
         <ion-label position="floating" color="medium">Filter Products by Price..</ion-label>
         <ion-select interface="popover" class="ion-float-left">
@@ -76,9 +73,9 @@
           <ion-select-option value="Senior">Senior</ion-select-option>
         </ion-select>
       </ion-item>
-    </ion-col>
+    </ion-col> -->
   </ion-row>
-  <ion-card>
+  <ion-card *ngIf="!noProductsFound">
     <ion-card-content>
       <div class="wrapper-content">
         <table class="rwd-table">
@@ -87,36 +84,56 @@
             <th>Product Name</th>
             <th>Dosage</th>
             <th>Category</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Status</th>
+            <th>Box</th>
+            <th>Units Per Box</th>
+            <!-- <th>Total Units</th> -->
+            <th>Price Per Box</th>
+            <th>Price Per Unit</th>
+            <th>Require Prescription</th>
+            <th>Supplier</th>
             <th>Edit</th>
           </tr>
-          <tr class="table-content">
-            <td class="td-left" data-th="ID">1001</td>
-            <td data-th="Product Name">Panadol</td>
-            <td data-th="Dosage">10ml</td>
-            <td data-th="Category">Pain Killer</td>
-            <td data-th="Quantity">10</td>
-            <td data-th="Price">Rs 100</td>
-            <td data-th="Status">Active</td>
+          <tr class="table-content" *ngFor="let product of products">
+            <td class="td-left" data-th="ID">{{product.productId}}</td>
+            <td data-th="Product Name">{{product.productName}}</td>
+            <td data-th="Dosage">{{product.dosage}}</td>
+            <td data-th="Category">{{product.category}}</td>
+            <td data-th="Box">{{product.box}}</td>
+            <td data-th="Units Per Box">{{product.unitsPerBox}}</td>
+            <td data-th="Price Per Box">{{product.pricePerBox}}</td>
+            <td data-th="Price Per Unit">{{product.pricePerUnit}}</td>
+            <td data-th="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</td>
+            <td data-th="Supplier">{{product.supplier.supplierName}}</td>
             <td class="Edit" data-th="Edit">
               <ion-icon class="edit" name="create"></ion-icon>
             </td>
           </tr>
         </table>
       </div>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more products...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-card-content>
   </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <div class="container">
-        <div class="title">
-          <img class="subtitle-logo" src='../../../../assets/icon/add-product.png'>
-          <h5>Add Product</h5>
+  <ion-card *ngIf="noProductsFound">
+    <div class="d-flex justify-content-center text-align-center">
+      <img class="productNotFound" src='../../../assets/icon/product_not_found1.png'>
+    </div>
+    
+  </ion-card>
+  <div #target>
+    <ion-card>
+      <ion-card-content>
+        <div class="container">
+          <div class="title">
+            <img class="subtitle-logo" src='../../../../assets/icon/add-product.png'>
+            <h5>Add Product</h5>
+          </div>
         </div>
-      </div>
-      <app-add-product-form></app-add-product-form>
-    </ion-card-content>
-  </ion-card>
+        <app-add-product-form></app-add-product-form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
 </ion-content>

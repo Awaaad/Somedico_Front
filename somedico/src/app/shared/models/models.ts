@@ -2,20 +2,20 @@ export class ProductDto {
     productId: number;
     productName: string;
     description: string;
+    dosage: string;
     category: string;
-    makeDate: Date;
-    expiryDate: Date;
-    supplier: string;
-    price: number;
-    quantity: number;
-    stock: StockDto;
+    box: number;
+    unitsPerBox: number;
+    unitsTotal: number;
+    pricePerBox: number;
+    pricePerUnit: number;
+    requirePrescription: boolean;
+    supplier: SupplierDto;
 }
 
-export class StockDto {
-    stockId: number;
-    stockName: string;
-    dateAdded: Date;
-    user: UserDto;
+export class SupplierDto {
+    supplierId: number;
+    supplierName: string;
 }
 
 export class UserDto {
@@ -25,4 +25,14 @@ export class UserDto {
     age: number;
     email: string;
     phone: number;
+}
+
+export class ProductListDto {
+    products: ProductDto[];
+}
+
+export class FilterProductListDto {
+    products: ProductDto[];
+    totalElements: number;
+    totalPages: number;
 }
