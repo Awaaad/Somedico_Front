@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'point-of-sale',
     loadChildren: () => import('./pages/point-of-sale/point-of-sale.module').then( m => m.PointOfSalePageModule)
   },
+  {
+    path: 'edit-product-modal',
+    loadChildren: () => import('./shared/modals/edit-product-modal/edit-product-modal.module').then( m => m.EditProductModalPageModule)
+  },
 ];
 
 @NgModule({

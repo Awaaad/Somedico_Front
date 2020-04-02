@@ -16,6 +16,8 @@ import { FooterComponent } from '../app/shared/components/footer/footer.componen
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 
+import { EditProductModalPageModule } from './shared/modals/edit-product-modal/edit-product-modal.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { ApiService } from './services/api.service';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    EditProductModalPageModule
   ],
   providers: [
     StatusBar,

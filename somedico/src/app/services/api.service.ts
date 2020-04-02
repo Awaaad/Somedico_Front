@@ -16,6 +16,9 @@ export class ApiService {
     return this.http.get<ProductDto[]>(this.baseUrl + '/product/all');
   }
 
+  getProductById(productId: number): Observable<ProductDto | any> {
+    return this.http.get<ProductDto | any>(this.baseUrl + 'product/id/?productId=' + productId);
+  }
   // tslint:disable-next-line: max-line-length
   getAllProductThroughFilter(productName: string, supplierName: string, category: string, pageNumber: number, pageSize: number, sortOrder: string, sortBy: string): Observable<FilterProductListDto[] | any> {
     return this.http.get<FilterProductListDto[] | any>

@@ -3,7 +3,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { Subscription } from 'rxjs';
 import { FilterProductListDto, ProductDto } from 'src/app/shared/models/models';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ToastController, ModalController } from '@ionic/angular';
+import { EditProductModalPage } from '../../shared/modals/edit-product-modal/edit-product-modal.page';
 
 @Component({
   selector: 'app-products',
@@ -31,11 +32,21 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   private submitAddProductFormSubscription: Subscription;
   constructor(
     private apiService: ApiService,
-    private emittersService: EmittersService
+    private emittersService: EmittersService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.getAllProductsFromDB();
+  }
+
+  openAddModal() {
+    this.modalController.create({
+      component: EditProductModalPage,
+      cssClass: 'modal-container'
+    }).then((modalElement) => {
+      modalElement.present();
+    });
   }
 
   ngAfterViewInit(): void {
