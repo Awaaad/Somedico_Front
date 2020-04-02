@@ -30,6 +30,10 @@ export class PointOfSalePage implements OnInit {
   value = '0';
   oldValue = '0';
 
+  public boxes: number;
+  public units: number;
+  public total: number;
+
   lastOperator = 'x';
   readyForNewInput = true;
   numberGroups = [
@@ -46,7 +50,6 @@ export class PointOfSalePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
   }
 
   searchByProductName(productName: string) {
@@ -79,7 +82,9 @@ export class PointOfSalePage implements OnInit {
     }
   }
 
-  addProductToCart(productId: number): void {
+  public addProductToCart(productId: number): void {
+    this.boxes = 0;
+    this.units = 0;
     console.log('productId', productId);
     this.apiService.getProductById(productId).subscribe(
       (data = ProductDto) => {
@@ -89,7 +94,37 @@ export class PointOfSalePage implements OnInit {
         // localStorage.setItem('products', JSON.stringify(x));
       }
     );
+    console.log('this.productsInCart', this.productsInCart);
     // this.array = this.array.push(this.productsInCart);
+  }
+
+  // public removeProductInCart(productId: number): void {
+  //   for (let i = 0; i < this.productsInCart.length; i++) {
+  //     if (this.productsInCart[i].productId == productId) {
+  //       console.log(this.productsInCart[i].productId);
+  //       this.productsInCart.splice(i, 1);
+  //       console.log('removedProuct', this.productsInCart);
+  //       // localStorage.removeItem('players');
+  //       // localStorage.setItem('players', JSON.stringify(this.players));
+  //     }
+  //   }
+  // }
+
+  public removeProductInCart(index: number): void {
+    for (let i = 0; i < this.productsInCart.length; i++) {
+      if (i == index) {
+        console.log(this.productsInCart[i].productId);
+        this.productsInCart.splice(i, 1);
+        console.log('removedProuct', this.productsInCart);
+        // localStorage.removeItem('players');
+        // localStorage.setItem('players', JSON.stringify(this.players));
+      }
+    }
+  }
+
+  calculateBoxRequested(boxRequested: number) {
+    this.boxes = boxRequested;
+    console.log(this.boxes);
   }
 
   // calculator

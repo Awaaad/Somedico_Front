@@ -78,35 +78,34 @@
             <th>Dosage</th>
             <th>Slot</th>
             <!-- <th>Category</th> -->
-            <th>Quantity</th>
-            <th>Price (per box)</th>
+            <th>Boxes</th>
+            <th>Price Per Box</th>
             <th>Box</th>
-            <th>Price (per unit)</th>
+            <th>Units Per Box</th>
+            <th>Price Per Unit</th>
             <th>Unit</th>
             <th>Total</th>
             <th></th>
           </tr>
-          <tr class="table-content">
-            <td data-th="Product Name">Panadol</td>
-            <td data-th="Dosage">10ml</td>
-            <td data-th="Slot">A1</td>
+          <tr class="table-content" *ngFor="let productInCart of productsInCart; let i = index;">
+            <td data-th="Product Name">{{productInCart.productName}}</td>
+            <td data-th="Dosage">{{productInCart.dosage}}</td>
+            <td data-th="Category">{{productInCart.category}}</td>
             <!-- <td data-th="Category">Pain Killer</td> -->
-            <td data-th="QuantityInStock">12</td>
-            <td data-th="PriceBox">100.00</td>
+            <td data-th="Boxes">{{productInCart.box}}</td>
+            <td data-th="PriceBox">{{productInCart.pricePerBox}}</td>
             <td data-th="Box">
-              <input class="input-number" type="number">
+              <input class="input-number" type="number">{{i}}
             </td>
-            <td data-th="PriceUnit">10.00</td>
+            <td data-th="Units">{{productInCart.unitsPerBox}}</td>
+            <td data-th="PriceUnit">{{productInCart.pricePerUnit}}</td>
             <td data-th="PriceUnit">
-              <input class="input-number" type="number">
+              <input class="input-number" type="number" [(ngModel)]="units">
             </td>
-            <!-- <td data-th="Quantity">
-              <input class="input-number" type="number">
-            </td> -->
             <td data-th="Total">
-              100.00
+              {{(boxes * productInCart.pricePerBox) + (units * productInCart.pricePerUnit)}}
             </td>
-            <td class="delete-item" data-th="Delete">
+            <td (click)="removeProductInCart(i)" class="delete-item" data-th="Delete">
               <ion-icon class="delete-product-btn" name="trash"></ion-icon>
             </td>
           </tr>
