@@ -11,6 +11,8 @@ export class ProductDto {
     pricePerUnit: number;
     requirePrescription: boolean;
     supplier: SupplierDto;
+    boxesOrdered?: number;
+    unitsOrdered?: number;
 }
 
 export class SupplierDto {

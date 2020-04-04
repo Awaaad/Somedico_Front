@@ -87,7 +87,7 @@
             <th>Total</th>
             <th></th>
           </tr>
-          <tr class="table-content" *ngFor="let productInCart of productsInCart; let i = index;">
+          <tr class="table-content" *ngFor="let productInCart of productsInCart; let i = index; ">
             <td data-th="Product Name">{{productInCart.productName}}</td>
             <td data-th="Dosage">{{productInCart.dosage}}</td>
             <td data-th="Category">{{productInCart.category}}</td>
@@ -95,12 +95,12 @@
             <td data-th="Boxes">{{productInCart.box}}</td>
             <td data-th="PriceBox">{{productInCart.pricePerBox}}</td>
             <td data-th="Box">
-              <input class="input-number" type="number">{{i}}
+              <input class="input-number" type="number" [(ngModel)]="productInCart.boxesOrdered">
             </td>
             <td data-th="Units">{{productInCart.unitsPerBox}}</td>
             <td data-th="PriceUnit">{{productInCart.pricePerUnit}}</td>
-            <td data-th="PriceUnit">
-              <input class="input-number" type="number" [(ngModel)]="units">
+            <td data-th="Unit">
+              <input class="input-number" type="number" [(ngModel)]="productInCart.unitsOrdered">
             </td>
             <td data-th="Total">
               {{(boxes * productInCart.pricePerBox) + (units * productInCart.pricePerUnit)}}
@@ -120,7 +120,7 @@
             <ion-button class="new-purchase-btn" color="warning">New Sale</ion-button>
           </div>
           <div class="make-purchase">
-            <ion-button class="make-purchase-btn" color="secondary">Complete Sale</ion-button>
+            <ion-button class="make-purchase-btn" color="secondary" (click)="completeSale()">Complete Sale</ion-button>
           </div>
         </div>
       </div>

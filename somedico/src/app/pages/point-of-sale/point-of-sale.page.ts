@@ -34,6 +34,9 @@ export class PointOfSalePage implements OnInit {
   public units: number;
   public total: number;
 
+  boxesOrderd = 0;
+  unitsOrdered = 0;
+
   lastOperator = 'x';
   readyForNewInput = true;
   numberGroups = [
@@ -82,33 +85,22 @@ export class PointOfSalePage implements OnInit {
     }
   }
 
+  indexTracker(index: number, unit: any) {
+    // console.log('unit', unit);
+    // console.log('index', index);
+    return index;
+  }
+
   public addProductToCart(productId: number): void {
     this.boxes = 0;
     this.units = 0;
-    console.log('productId', productId);
     this.apiService.getProductById(productId).subscribe(
       (data = ProductDto) => {
         this.productsInCart.push(data);
-        // let x: ProductDto[] = [];
-        // x.push(this.productsInCart);
-        // localStorage.setItem('products', JSON.stringify(x));
       }
     );
-    console.log('this.productsInCart', this.productsInCart);
-    // this.array = this.array.push(this.productsInCart);
   }
 
-  // public removeProductInCart(productId: number): void {
-  //   for (let i = 0; i < this.productsInCart.length; i++) {
-  //     if (this.productsInCart[i].productId == productId) {
-  //       console.log(this.productsInCart[i].productId);
-  //       this.productsInCart.splice(i, 1);
-  //       console.log('removedProuct', this.productsInCart);
-  //       // localStorage.removeItem('players');
-  //       // localStorage.setItem('players', JSON.stringify(this.players));
-  //     }
-  //   }
-  // }
 
   public removeProductInCart(index: number): void {
     for (let i = 0; i < this.productsInCart.length; i++) {
@@ -116,23 +108,32 @@ export class PointOfSalePage implements OnInit {
         console.log(this.productsInCart[i].productId);
         this.productsInCart.splice(i, 1);
         console.log('removedProuct', this.productsInCart);
-        // localStorage.removeItem('players');
-        // localStorage.setItem('players', JSON.stringify(this.players));
       }
     }
   }
 
-  calculateBoxRequested(boxRequested: number) {
-    this.boxes = boxRequested;
-    console.log(this.boxes);
+  completeSale() {
+    // for(let i = 0; i < this.productsInCart.length; i++){
+    //   this.productsInCart[i].box = this.productsInCart[i].boxesOrdered;
+    //   this.productsInCart[i].unitsTotal = this.productsInCart[i].unitsOrdered;
+    // }
+
+    this.productsInCart.forEach((element, index)=> {
+      if (this.productsInCart[index].box == null || this.productsInCart[index].unitsTotal == null){
+        this.productsInCart[index].box = 0;
+        this.productsInCart[index].unitsTotal = 0;
+      }
+      this.productsInCart[index].box = (this.productsInCart[index].box - this.productsInCart[index].boxesOrdered);
+      this.productsInCart[index].unitsTotal = (this.productsInCart[index].unitsTotal - this.productsInCart[index].unitsOrdered);
+    });
+
+    console.log(this.productsInCart)
   }
 
   // calculator
   onButtonPress(symbol) {
-    console.log(symbol);
 
     if (isNumber(symbol)) {
-      console.log('is a number');
       if (this.readyForNewInput) {
         this.value = '' + symbol;
       } else {
