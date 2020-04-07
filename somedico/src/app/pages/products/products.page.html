@@ -104,7 +104,7 @@
             <td data-th="Price Per Unit">{{product.pricePerUnit}}</td>
             <td data-th="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</td>
             <td data-th="Supplier">{{product.supplier.supplierName}}</td>
-            <td class="Edit" data-th="Edit" (click)="openAddModal()">
+            <td class="Edit" data-th="Edit" (click)="openAddModal(product.productId)">
               <ion-icon class="edit" name="create"></ion-icon>
             </td>
           </tr>

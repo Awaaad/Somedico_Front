@@ -15,6 +15,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
   products: ProductDto[] = [];
+  product: ProductDto;
   showFilter = false;
   refreshProductList: boolean;
   noProductsFound = false;
@@ -30,6 +31,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   public totalProducts: number;
 
   private submitAddProductFormSubscription: Subscription;
+  private submitEditProductFormSubscription: Subscription;
   constructor(
     private apiService: ApiService,
     private emittersService: EmittersService,
@@ -40,20 +42,49 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     this.getAllProductsFromDB();
   }
 
-  openAddModal() {
-    this.modalController.create({
-      component: EditProductModalPage,
-      cssClass: 'modal-container'
-    }).then((modalElement) => {
-      modalElement.present();
+  openAddModal(productId: number) {
+    this.apiService.getProductById(productId).subscribe(
+      data => {
+        this.product = data;
+        console.log(this.product);
     });
+    setTimeout(() => {
+      this.modalController.create({
+        component: EditProductModalPage,
+        cssClass: 'modal-container',
+        componentProps: {
+          productId: this.product.productId,
+          productName: this.product.productName,
+          description: this.product.description,
+          dosage: this.product.dosage,
+          category: this.product.category,
+          box: this.product.box,
+          unitsPerBox: this.product.unitsPerBox,
+          unitsTotal: this.product.unitsTotal,
+          pricePerBox: this.product.pricePerBox,
+          pricePerUnit: this.product.pricePerUnit,
+          requirePrescription: this.product.requirePrescription,
+          supplier: this.product.supplier
+        }
+      }).then((modalElement) => {
+        modalElement.present();
+      });
+    }, 100);
   }
 
   ngAfterViewInit(): void {
     this.submitAddProductFormSubscription = this.emittersService.emitAddProductEventEmmiter.subscribe(data => {
       this.refreshProductList = data;
       console.log('submit', this.refreshProductList);
-      if (this.refreshProductList == true) {
+      if (this.refreshProductList === true) {
+        this.products = [];
+        this.getAllProductsFromDB();
+      }
+    });
+    this.submitEditProductFormSubscription = this.emittersService.emitEditProductEventEmmiter.subscribe(data => {
+      this.refreshProductList = data;
+      console.log('submit', this.refreshProductList);
+      if (this.refreshProductList === true) {
         this.products = [];
         this.getAllProductsFromDB();
       }
@@ -78,6 +109,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
       this.products = [];
       this.totalProducts = 0;
     }
+    // tslint:disable-next-line: max-line-length
     this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterProductListDto) => {
         this.products = [...this.products, ...data.products];
@@ -125,6 +157,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.submitAddProductFormSubscription.unsubscribe();
+    this.submitEditProductFormSubscription.unsubscribe();
   }
 
 }

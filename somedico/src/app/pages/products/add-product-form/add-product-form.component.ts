@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-product-form',
@@ -10,11 +11,13 @@ import { EmittersService } from 'src/app/services/emitters.service';
 })
 export class AddProductFormComponent implements OnInit {
   addProductForm: FormGroup;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
-    private emittersService: EmittersService
+    private emittersService: EmittersService,
+    private toastCtrl: ToastController,
   ) { }
 
   ngOnInit() {
@@ -58,10 +61,9 @@ export class AddProductFormComponent implements OnInit {
   }
 
   save() {
-
     const products = {
       products: this.addProductForm.controls.products.value
-    }
+    };
     console.log(this.addProductForm.controls.products.value);
     this.apiService.saveAllProducts(products).subscribe(
       data => {
@@ -79,5 +81,38 @@ export class AddProductFormComponent implements OnInit {
     // console.log(this.addProductForm.get('products') as FormArray);
     // console.log(this.addProductForm.get('products') as FormArray);
     // console.log(this.addProductForm.controls.products.value);
+  }
+
+  async successMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Product(s) successfully added',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  // unsuccessful message
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Please fill in all the required fields',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.addProductForm.invalid) {
+      this.unsuccessMsg();
+    } else {
+      this.save();
+      this.successMsg();
+    }
   }
 }

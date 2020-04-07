@@ -53,8 +53,8 @@
           <td data-th="Category">{{product.category}}</td>
           <td data-th="Box">{{product.box}}</td>
           <td data-th="Units Per Box">{{product.unitsPerBox}}</td>
-          <td data-th="Price Per Box">{{product.pricePerBox}}</td>
-          <td data-th="Price Per Unit">{{product.pricePerUnit}}</td>
+          <td data-th="Price Per Box">Rs {{product.pricePerBox}}</td>
+          <td data-th="Price Per Unit">Rs {{product.pricePerUnit}}</td>
           <td data-th="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</td>
           <td class="add" data-th="Add">
             <ion-button (click)="addProductToCart(product.productId)" class="add-btn" color='danger'>
@@ -93,17 +93,18 @@
             <td data-th="Category">{{productInCart.category}}</td>
             <!-- <td data-th="Category">Pain Killer</td> -->
             <td data-th="Boxes">{{productInCart.box}}</td>
-            <td data-th="PriceBox">{{productInCart.pricePerBox}}</td>
+            <td data-th="PriceBox">Rs {{productInCart.pricePerBox}}</td>
             <td data-th="Box">
-              <input class="input-number" type="number" [(ngModel)]="productInCart.boxesOrdered">
+              <input class="input-number" type="number" max="productInCart.box" [(ngModel)]="productInCart.boxesOrdered" (ngModelChange)="calculateSubTotal()">
             </td>
             <td data-th="Units">{{productInCart.unitsPerBox}}</td>
-            <td data-th="PriceUnit">{{productInCart.pricePerUnit}}</td>
+            <td data-th="PriceUnit">Rs {{productInCart.pricePerUnit}}</td>
             <td data-th="Unit">
-              <input class="input-number" type="number" [(ngModel)]="productInCart.unitsOrdered">
+              <input class="input-number" type="number" max="productInCart.unitsTotal" [(ngModel)]="productInCart.unitsOrdered" (ngModelChange)="calculateSubTotal()">
             </td>
             <td data-th="Total">
-              {{(boxes * productInCart.pricePerBox) + (units * productInCart.pricePerUnit)}}
+              Rs {{((productInCart.boxesOrdered? productInCart.boxesOrdered : 0) * productInCart.pricePerBox) + ((productInCart.unitsOrdered? productInCart.unitsOrdered : 0) * productInCart.pricePerUnit)}}
+              <!-- {{productInCart.totalPrice}} -->
             </td>
             <td (click)="removeProductInCart(i)" class="delete-item" data-th="Delete">
               <ion-icon class="delete-product-btn" name="trash"></ion-icon>
@@ -113,7 +114,7 @@
       </div>
       <div class="wrapper-bottom">
         <div class="sub-total">
-          Sub Total: Rs 100.00
+          Sub Total: Rs {{ subTotal }}
         </div>
         <div class="action-btn">
           <div class="new-purchase">
@@ -137,9 +138,9 @@
         <ion-col size="8">
           <ion-card class="quick-balance">
             <ion-card-content>
-              <h3>Paid:<input class="input-number balance calculator-paid" type="number"></h3>
-              <h3>Sub Total: <span class="balance calculator-subtotal">100.00</span></h3>
-              <h3>Balance: <span class="balance calculator-balance">100.00</span></h3>
+              <h3>Paid:<input class="input-number balance calculator-paid" type="number" [(ngModel)]="paid"></h3>
+              <h3>Sub Total: <span class="balance calculator-subtotal">{{ subTotal }}</span></h3>
+              <h3>Balance: <span class="balance calculator-balance">{{ paid - subTotal}}</span></h3>
             </ion-card-content>
           </ion-card>
         </ion-col>

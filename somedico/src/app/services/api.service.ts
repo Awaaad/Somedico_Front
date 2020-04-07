@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductDto, ProductListDto, FilterProductListDto } from '../shared/models/models';
+import { ProductDto, ProductListDto, FilterProductListDto, OrderDto } from '../shared/models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,5 +28,13 @@ export class ApiService {
 
   saveAllProducts(productListDto: ProductListDto): Observable<ProductListDto> {
     return this.http.post<ProductListDto>(this.baseUrl + 'product/saveProducts', productListDto);
+  }
+
+  editProduct(productDto: ProductDto): Observable<ProductDto> {
+    return this.http.put<ProductDto>(this.baseUrl + 'product/editProduct', productDto);
+  }
+
+  saveOrder(orderDto: OrderDto): Observable<OrderDto> {
+    return this.http.post<OrderDto>(this.baseUrl + 'order/saveOrder', orderDto);
   }
 }

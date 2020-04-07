@@ -4,6 +4,7 @@ import { ProductDto, FilterProductListDto } from 'src/app/shared/models/models';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController } from '@ionic/angular';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-point-of-sale',
@@ -14,6 +15,7 @@ export class PointOfSalePage implements OnInit {
 
   products: ProductDto[] = [];
   productsInCart: ProductDto[] = [];
+  completeProductSale: ProductDto[] = [];
   array: any;
   noProductsFound = false;
   showProductList = false;
@@ -32,7 +34,8 @@ export class PointOfSalePage implements OnInit {
 
   public boxes: number;
   public units: number;
-  public total: number;
+  public subTotal = 0;
+  public paid = 0;
 
   boxesOrderd = 0;
   unitsOrdered = 0;
@@ -58,10 +61,11 @@ export class PointOfSalePage implements OnInit {
   searchByProductName(productName: string) {
     this.productName = productName;
     this.getAllProductsFromDB();
+    this.completeSale();
   }
 
   getAllProductsFromDB() {
-    if (this.productName == '') {
+    if (this.productName === '') {
       this.showProductList = false;
       this.products = [];
     } else {
@@ -85,18 +89,17 @@ export class PointOfSalePage implements OnInit {
     }
   }
 
-  indexTracker(index: number, unit: any) {
-    // console.log('unit', unit);
-    // console.log('index', index);
-    return index;
-  }
-
   public addProductToCart(productId: number): void {
-    this.boxes = 0;
-    this.units = 0;
     this.apiService.getProductById(productId).subscribe(
       (data = ProductDto) => {
         this.productsInCart.push(data);
+
+        this.productsInCart.forEach((element, index) => {
+          if (this.productsInCart[index].boxesOrdered == null || this.productsInCart[index].unitsOrdered == null) {
+            this.productsInCart[index].boxesOrdered = 0;
+            this.productsInCart[index].unitsOrdered = 0;
+          }
+        });
       }
     );
   }
@@ -104,30 +107,49 @@ export class PointOfSalePage implements OnInit {
 
   public removeProductInCart(index: number): void {
     for (let i = 0; i < this.productsInCart.length; i++) {
-      if (i == index) {
+      if (i === index) {
         console.log(this.productsInCart[i].productId);
         this.productsInCart.splice(i, 1);
         console.log('removedProuct', this.productsInCart);
       }
     }
+    this.calculateSubTotal();
+  }
+
+  calculateSubTotal() {
+    this.subTotal = 0;
+    this.productsInCart.forEach((element, index) => {
+      // tslint:disable-next-line: max-line-length
+      this.productsInCart[index].total = ((this.productsInCart[index].boxesOrdered * this.productsInCart[index].pricePerBox) + (this.productsInCart[index].unitsOrdered * this.productsInCart[index].pricePerUnit));
+      this.subTotal = this.subTotal + this.productsInCart[index].total;
+    });
   }
 
   completeSale() {
-    // for(let i = 0; i < this.productsInCart.length; i++){
-    //   this.productsInCart[i].box = this.productsInCart[i].boxesOrdered;
-    //   this.productsInCart[i].unitsTotal = this.productsInCart[i].unitsOrdered;
-    // }
-
-    this.productsInCart.forEach((element, index)=> {
-      if (this.productsInCart[index].box == null || this.productsInCart[index].unitsTotal == null){
-        this.productsInCart[index].box = 0;
-        this.productsInCart[index].unitsTotal = 0;
-      }
+    this.productsInCart.forEach((element, index) => {
       this.productsInCart[index].box = (this.productsInCart[index].box - this.productsInCart[index].boxesOrdered);
       this.productsInCart[index].unitsTotal = (this.productsInCart[index].unitsTotal - this.productsInCart[index].unitsOrdered);
     });
 
-    console.log(this.productsInCart)
+    const order = {
+      cashierName: 'Awad',
+      customerName: 'Awad',
+      orderDate: new Date(),
+      productName: 'Test',
+      quantityOrderedBox: 1,
+      quantityOrderedUnit: 1,
+      products: this.productsInCart,
+      totalPrice: 1
+    };
+
+    console.log(order);
+
+    // this.apiService.saveOrder(order).subscribe(
+    //   data => {
+    //   },
+    //   error => {
+    //   }
+    // );
   }
 
   // calculator

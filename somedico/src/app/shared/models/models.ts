@@ -1,3 +1,5 @@
+import { NumberSymbol } from '@angular/common';
+
 export class ProductDto {
     productId: number;
     productName: string;
@@ -13,6 +15,7 @@ export class ProductDto {
     supplier: SupplierDto;
     boxesOrdered?: number;
     unitsOrdered?: number;
+    total?: number;
 }
 
 export class SupplierDto {
@@ -37,4 +40,15 @@ export class FilterProductListDto {
     products: ProductDto[];
     totalElements: number;
     totalPages: number;
+}
+
+export class OrderDto {
+    cashierName: string;
+    customerName: string;
+    orderDate: Date;
+    productName: string;
+    quantityOrderedBox: number;
+    quantityOrderedUnit: NumberSymbol;
+    products: ProductDto[];
+    totalPrice: number;
 }
