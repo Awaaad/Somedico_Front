@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'confirmation-modal',
     loadChildren: () => import('./shared/modals/confirmation-modal/confirmation-modal.module').then( m => m.ConfirmationModalPageModule)
   },
+  {
+    path: 'order-history',
+    loadChildren: () => import('./pages/order-history/order-history.module').then( m => m.OrderHistoryPageModule)
+  },
 ];
 
 @NgModule({

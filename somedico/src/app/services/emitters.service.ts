@@ -7,6 +7,7 @@ export class EmittersService {
 
   @Output() public emitAddProductEventEmmiter = new EventEmitter<boolean>();
   @Output() public emitEditProductEventEmmiter = new EventEmitter<boolean>();
+  @Output() public resetPOS = new EventEmitter<boolean>();
 
   constructor() { }
 }

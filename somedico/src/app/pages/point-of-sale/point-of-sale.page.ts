@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { isNumber } from 'util';
 import { ProductDto, FilterProductListDto, OrderProductDto } from 'src/app/shared/models/models';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ConfirmationModalPage } from 'src/app/shared/modals/confirmation-modal/confirmation-modal.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-point-of-sale',
   templateUrl: './point-of-sale.page.html',
   styleUrls: ['./point-of-sale.page.scss'],
 })
-export class PointOfSalePage implements OnInit {
+export class PointOfSalePage implements OnInit, OnDestroy {
 
   public products: ProductDto[] = [];
   public productsInCart: ProductDto[] = [];
@@ -40,12 +41,14 @@ export class PointOfSalePage implements OnInit {
   public limit = 100;
   public lastOperator = 'x';
   public readyForNewInput = true;
+  public disableCompleteSaleButton = false;
   numberGroups = [
     [7, 8, 9, 'x'],
     [4, 5, 6, '-'],
     [1, 2, 3, '+'],
     [0, 'c', '/', '=']
   ];
+  public refreshPOSSubscription: Subscription;
 
   constructor(
     private apiService: ApiService,
@@ -54,8 +57,18 @@ export class PointOfSalePage implements OnInit {
     private toastCtrl: ToastController,
   ) { }
 
-  ngOnInit() {
-    this.orderProducts.productDto = [];
+  ngOnInit(): void {
+    this.refreshPOSSubscription = this.emittersService.resetPOS.subscribe(
+      (refresh: boolean) => {
+        if (refresh) {
+          this.newSale();
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.refreshPOSSubscription.unsubscribe();
   }
 
   searchByProductName(productName: string) {
@@ -88,6 +101,7 @@ export class PointOfSalePage implements OnInit {
   }
 
   public addProductToCart(productId: number): void {
+    this.disableCompleteSaleButton = false;
     this.apiService.getProductById(productId).subscribe(
       (data = ProductDto) => {
         this.productsInCart.push(data);
@@ -98,10 +112,7 @@ export class PointOfSalePage implements OnInit {
           boxesOrdered: null,
           unitsOrdered: null,
           totalPrice: null
-
         });
-        console.log(this.orderProducts)
-        this.orderProducts.productDto.push(this.productsInCart);
         this.productsInCart.forEach((product, index) => {
           if (this.productsInCart[index].boxesOrdered == null || this.productsInCart[index].unitsOrdered == null) {
             this.productsInCart[index].boxesOrdered = 0;
@@ -116,9 +127,9 @@ export class PointOfSalePage implements OnInit {
   public removeProductInCart(index: number): void {
     for (let i = 0; i < this.productsInCart.length; i++) {
       if (i === index) {
-        console.log(this.productsInCart[i].productId);
+        // console.log(this.productsInCart[i].productId);
         this.productsInCart.splice(i, 1);
-        console.log('removedProuct', this.productsInCart);
+        // console.log('removedProuct', this.productsInCart);
       }
     }
     this.calculateSubTotal();
@@ -132,46 +143,47 @@ export class PointOfSalePage implements OnInit {
     });
   }
 
+  completeSale() {
+    this.productsInCart.forEach((product, index) => {
+      this.orderProducts[index].productName = this.productsInCart[index].productName;
+      this.orderProducts[index].boxesOrdered = this.productsInCart[index].boxesOrdered;
+      this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox ) + this.productsInCart[index].unitsOrdered;
+      this.orderProducts[index].totalPrice = this.productsInCart[index].total;
+      if (this.orderProducts[index].unitsOrdered === 0) {
+        this.removeProductInCart(index);
+      }
+    });
+    console.log(this.productsInCart);
+    if (this.productsInCart.length === 0) {
+      this.disableCompleteSaleButton = true;
+    } else {
+      this.openConfirmationModal();
+    }
+  }
+
   openConfirmationModal() {
     this.productsInCart.forEach((product, index) => {
       this.orderProducts[index].productName = this.productsInCart[index].productName;
       this.orderProducts[index].boxesOrdered = this.productsInCart[index].boxesOrdered;
       this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox ) + this.productsInCart[index].unitsOrdered;
       this.orderProducts[index].totalPrice = this.productsInCart[index].total;
-    });
-    this.modalController.create({
-      component: ConfirmationModalPage,
-      cssClass: 'confirmation-modal-container',
-      componentProps: {
-        orderProductDtos: this.orderProducts,
-        totalPrice: this.subTotal
-      },
-      backdropDismiss: false
-    }).then((modalElement) => {
-      modalElement.present();
-    });
-  }
-
-  completeSale() {
-    const order = {
-      cashierName: 'Awad',
-      customerName: 'Awad',
-      orderDate: new Date(),
-      orderProductDtos: this.orderProducts,
-      totalPrice: this.subTotal
-    };
-
-    console.log(order);
-
-    this.apiService.saveOrder(order).subscribe(
-      data => {
-      },
-      error => {
-        this.successMsg();
-        this.products = [];
-        this.productsInCart = [];
+      if (this.orderProducts[index].unitsOrdered === 0) {
+        this.removeProductInCart(index);
       }
-    );
+    });
+    if (this.productsInCart.length > 0) {
+      this.modalController.create({
+        component: ConfirmationModalPage,
+        cssClass: 'confirmation-modal-container',
+        componentProps: {
+          orderProductDtos: this.orderProducts,
+          totalPrice: this.subTotal
+        },
+        backdropDismiss: false
+      }).then((modalElement) => {
+        modalElement.present();
+      });
+    }
   }
 
   newSale() {

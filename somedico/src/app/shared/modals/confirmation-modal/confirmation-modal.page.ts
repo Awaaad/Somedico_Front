@@ -3,6 +3,7 @@ import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
+import { OrderProductDto } from '../../models/models';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -12,6 +13,7 @@ import { EmittersService } from 'src/app/services/emitters.service';
 export class ConfirmationModalPage implements OnInit {
 
   public confirmPurchaseForm: FormGroup;
+  public orderProducts: OrderProductDto[] = [];
   public paid: string;
 
   constructor(
@@ -24,13 +26,19 @@ export class ConfirmationModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.navParams);
     this.paid = 'true';
+    this.orderProducts = this.navParams.data.orderProductDtos;
+    this.orderProducts.forEach((product, index) => {
+      if (this.orderProducts[index].unitsOrdered === null) {
+        delete this.orderProducts[index].productDto;
+      }
+    });
     this.confirmPurchaseForm = this.formBuilder.group({
       cashierName: new FormControl(''),
       customerName: new FormControl(''),
       paid: new FormControl()
     });
+    console.log(this.orderProducts);
   }
 
   // close modal
@@ -44,7 +52,7 @@ export class ConfirmationModalPage implements OnInit {
       customerName: this.confirmPurchaseForm.get('customerName').value,
       orderDate: new Date(),
       paid: this.confirmPurchaseForm.get('paid').value,
-      orderProductDtos: this.navParams.data.orderProductDtos,
+      orderProductDtos: this.orderProducts,
       totalPrice: this.navParams.data.totalPrice
     };
     this.apiService.saveOrder(order).subscribe(
@@ -55,6 +63,7 @@ export class ConfirmationModalPage implements OnInit {
 
       }
     );
+    this.emittersService.resetPOS.emit(true);
     this.modalController.dismiss();
   }
 }

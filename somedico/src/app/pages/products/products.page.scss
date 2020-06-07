@@ -1,5 +1,6 @@
 @import '../../shared/styles/common.scss';
 $breakpoint-alpha: 480px;
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -24,9 +25,10 @@ ion-icon.edit {
     padding-top: 10px;
 }
 
-.main-action{
-    padding:0;
+.main-action {
+    padding: 0;
 }
+
 .show-filter-btn {
     float: right;
     margin-top: 12px;
@@ -35,6 +37,7 @@ ion-icon.edit {
 .router-links {
     display: flex;
     justify-content: space-between;
+
     .add-button {
         margin-top: 5px;
         margin-right: 5px;
@@ -47,7 +50,132 @@ ion-icon.edit {
     margin-top: 5rem;
     margin-bottom: 5rem;
     max-width: 20rem;
+
     @media only screen and (max-width: 1100px) {
         max-width: 12rem;
+    }
+}
+
+
+
+// new table design
+body {
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+.container {
+    max-width: 2000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h2 {
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+
+    small {
+        font-size: 0.5em;
+    }
+}
+
+.responsive-table {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    li {
+        border-radius: 3px;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 17px;
+    }
+
+    .table-header {
+        color: white;
+        background-color: var(--ion-color-secondary-tint, #50c8ff) !important;;
+        font-size: 17px;
+        text-transform: none;
+        letter-spacing: 0.03em;
+    }
+
+    .table-row {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(226, 226, 226);
+        }
+    }
+
+    .col-1 {
+      flex-basis: 2%;
+    }
+    .col-2 {
+      flex-basis: 8%;
+    }
+    .col-3 {
+      flex-basis: 8%;
+    }
+    .col-4 {
+      flex-basis: 8%;
+    }
+    .col-5 {
+      flex-basis: 8%;
+    }
+    .col-6 {
+      flex-basis: 12%;
+    }
+    .col-7 {
+      flex-basis: 12%;
+    }
+    .col-8 {
+      flex-basis: 12%;
+    }
+    .col-9 {
+      flex-basis: 10%;
+    }
+    .col-10 {
+      flex-basis: 10%;
+    }
+    .col-11 {
+      flex-basis: 5%;
+    }
+    .col-12 {
+      flex-basis: 2%;
+    }
+
+    @media all and (max-width: 767px) {
+        .table-header {
+            display: none;
+        }
+
+        .table-row {}
+
+        li {
+            display: block;
+        }
+
+        .col {
+
+            flex-basis: 100%;
+
+        }
+
+        .col {
+            display: flex;
+            padding: 10px 0;
+
+            &:before {
+                color: #6C7A89;
+                padding-right: 10px;
+                content: attr(data-label);
+                flex-basis: 50%;
+                text-align: right;
+            }
+        }
     }
 }
