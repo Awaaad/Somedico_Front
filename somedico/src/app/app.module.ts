@@ -12,11 +12,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderNavComponent } from '../app/shared/components/header-nav/header-nav.component';
 import { SideNavComponent } from '../app/shared/components/side-nav/side-nav.component';
 import { FooterComponent } from '../app/shared/components/footer/footer.component';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './services/api.service';
-
 import { EditProductModalPageModule } from './shared/modals/edit-product-modal/edit-product-modal.module';
+import { ConfirmationModalPageModule } from './shared/modals/confirmation-modal/confirmation-modal.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,8 @@ import { EditProductModalPageModule } from './shared/modals/edit-product-modal/e
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    EditProductModalPageModule
+    EditProductModalPageModule,
+    ConfirmationModalPageModule
   ],
   providers: [
     StatusBar,

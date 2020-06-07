@@ -64,11 +64,15 @@ export class AddProductFormComponent implements OnInit {
     const products = {
       products: this.addProductForm.controls.products.value
     };
+    this.addProductForm.controls.products.value.forEach(product => {
+      product.unitsTotal = product.unitsPerBox * product.box;
+    });
     console.log(this.addProductForm.controls.products.value);
     this.apiService.saveAllProducts(products).subscribe(
       data => {
       },
       error => {
+        this.unsuccessMsg();
       }
     );
 

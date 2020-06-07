@@ -19,11 +19,10 @@ export class ApiService {
   getProductById(productId: number): Observable<ProductDto | any> {
     return this.http.get<ProductDto | any>(this.baseUrl + 'product/id/?productId=' + productId);
   }
-  // tslint:disable-next-line: max-line-length
+
   getAllProductThroughFilter(productName: string, supplierName: string, category: string, pageNumber: number, pageSize: number, sortOrder: string, sortBy: string): Observable<FilterProductListDto[] | any> {
     return this.http.get<FilterProductListDto[] | any>
-    // tslint:disable-next-line: max-line-length
-    (this.baseUrl + 'product/filter/?productName=' + productName + '&supplierName=' + supplierName +  '&category=' + category + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);
+      (this.baseUrl + 'product/filter/?productName=' + productName + '&supplierName=' + supplierName + '&category=' + category + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);
   }
 
   saveAllProducts(productListDto: ProductListDto): Observable<ProductListDto> {
@@ -34,7 +33,7 @@ export class ApiService {
     return this.http.put<ProductDto>(this.baseUrl + 'product/editProduct', productDto);
   }
 
-  saveOrder(orderDto: OrderDto): Observable<OrderDto> {
-    return this.http.post<OrderDto>(this.baseUrl + 'order/saveOrder', orderDto);
+  saveOrder(orderDto: OrderDto) {
+    return this.http.post(this.baseUrl + 'order/saveOrder', orderDto);
   }
 }

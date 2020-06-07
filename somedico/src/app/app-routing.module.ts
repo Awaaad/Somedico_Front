@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'edit-product-modal',
     loadChildren: () => import('./shared/modals/edit-product-modal/edit-product-modal.module').then( m => m.EditProductModalPageModule)
   },
+  {
+    path: 'confirmation-modal',
+    loadChildren: () => import('./shared/modals/confirmation-modal/confirmation-modal.module').then( m => m.ConfirmationModalPageModule)
+  },
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@
     <ion-title>
       <div class="router-links">
         <div class="title">
-          <img class="header-logo" src='../../../assets/header_icons/products_1.png'>
+          <img class="header-logo" src='./assets/header_icons/products_1.png'>
           <h3 class="header-nav-products">Products</h3>
         </div>
         <div class="add-button">
@@ -86,7 +86,9 @@
             <th>Category</th>
             <th>Box</th>
             <th>Units Per Box</th>
-            <!-- <th>Total Units</th> -->
+
+            <th>Total Units</th>
+
             <th>Price Per Box</th>
             <th>Price Per Unit</th>
             <th>Require Prescription</th>
@@ -100,11 +102,14 @@
             <td data-th="Category">{{product.category}}</td>
             <td data-th="Box">{{product.box}}</td>
             <td data-th="Units Per Box">{{product.unitsPerBox}}</td>
+
+            <td data-th="Total Units">{{product.unitsTotal}}</td>
+
             <td data-th="Price Per Box">{{product.pricePerBox}}</td>
             <td data-th="Price Per Unit">{{product.pricePerUnit}}</td>
             <td data-th="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</td>
             <td data-th="Supplier">{{product.supplier.supplierName}}</td>
-            <td class="Edit" data-th="Edit" (click)="openAddModal(product.productId)">
+            <td class="Edit" data-th="Edit" (click)="openEditModal(product.productId)">
               <ion-icon class="edit" name="create"></ion-icon>
             </td>
           </tr>
@@ -118,7 +123,7 @@
   </ion-card>
   <ion-card *ngIf="noProductsFound">
     <div class="d-flex justify-content-center text-align-center">
-      <img class="productNotFound" src='../../../assets/icon/product_not_found1.png'>
+      <img class="productNotFound" src='./assets/icon/product_not_found1.png'>
     </div>
     
   </ion-card>
@@ -127,7 +132,7 @@
       <ion-card-content>
         <div class="container">
           <div class="title">
-            <img class="subtitle-logo" src='../../../../assets/icon/add-product.png'>
+            <img class="subtitle-logo" src='./assets/icon/add-product.png'>
             <h5>Add Product</h5>
           </div>
         </div>

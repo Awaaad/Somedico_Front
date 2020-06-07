@@ -119,11 +119,11 @@ ion-title {
     margin: 1em 0;
     // min-width: 300px; // adjust to your needs
     width: 100%;
-    text-align: center;
+    text-align: left;
 
     tr {
         font-size: 20px;
-        text-align: center !important;
+        text-align: left !important;
 
         @media only screen and (max-width: 1300px) {
             font-size: 16px;
@@ -132,7 +132,7 @@ ion-title {
 
     td {
         font-size: 18px;
-        text-align: center !important;
+        text-align: left !important;
         border-bottom: 2px solid $color-dark-green;
 
         @media only screen and (max-width: 1300px) {
@@ -147,7 +147,7 @@ ion-title {
 
     th {
         display: none;
-        text-align: center !important;
+        text-align: left !important;
         border-bottom: 2px solid $color-light-black;
         // border-right: 2px solid $color-light-black;
         border-top: 2px solid $color-light-black;
@@ -275,11 +275,27 @@ ion-button {
     font-size: 15px;
 }
 
-.modal-container .modal-wrapper {
+.edit-modal-container .modal-wrapper {
     height: 80% !important;
     position: absolute;
     display: block;
     width: 50% !important;
+
+    @media only screen and (max-width: 600px) {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        width: 85% !important;
+    }
+}
+
+.confirmation-modal-container .modal-wrapper {
+    height: 47% !important;
+    position: absolute;
+    display: block;
+    width: 40% !important;
 
     @media only screen and (max-width: 600px) {
         height: 100% !important;

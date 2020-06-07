@@ -6,7 +6,7 @@
     <ion-title>
       <div class="router-links">
         <div class="title">
-          <img class="header-logo" src='../../../assets/header_icons/point-of-sale.png'>
+          <img class="header-logo" src='./assets/header_icons/point-of-sale.png'>
           <h3 class="header-nav-products">Point of Sale</h3>
         </div>
       </div>
@@ -18,7 +18,7 @@
   <ion-row>
     <ion-col size="6">
       <div class="search-container">
-        <ion-searchbar placeholder="Search..." type="text" #productName (ionInput)="searchByProductName(productName.value)"></ion-searchbar>
+        <ion-searchbar placeholder="Search..." type="text"  #productName (ionInput)="searchByProductName(productName.value)"></ion-searchbar>
       </div>
       <div class="search-result-container">
 
@@ -68,7 +68,7 @@
     <!-- Cart -->
     <ion-card-content>
       <div class="subtitle">
-        <img class="cart-logo" src='../../../assets/icon/cart.png'>
+        <img class="cart-logo" src='./assets/icon/cart.png'>
         <h3 class="cart-text">Cart</h3>
       </div>
       <div class="wrapper-content">
@@ -118,10 +118,10 @@
         </div>
         <div class="action-btn">
           <div class="new-purchase">
-            <ion-button class="new-purchase-btn" color="warning">New Sale</ion-button>
+            <ion-button class="new-purchase-btn" color="warning" (click)="newSale()">New Sale</ion-button>
           </div>
           <div class="make-purchase">
-            <ion-button class="make-purchase-btn" color="secondary" (click)="completeSale()">Complete Sale</ion-button>
+            <ion-button class="make-purchase-btn" color="secondary" (click)="openConfirmationModal()">Complete Sale</ion-button>
           </div>
         </div>
       </div>

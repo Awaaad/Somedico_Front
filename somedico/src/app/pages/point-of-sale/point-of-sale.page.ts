@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { isNumber } from 'util';
-import { ProductDto, FilterProductListDto } from 'src/app/shared/models/models';
+import { ProductDto, FilterProductListDto, OrderProductDto } from 'src/app/shared/models/models';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
-import { ModalController } from '@ionic/angular';
-import { ThrowStmt } from '@angular/compiler';
+import { ModalController, ToastController } from '@ionic/angular';
+import { ConfirmationModalPage } from 'src/app/shared/modals/confirmation-modal/confirmation-modal.page';
 
 @Component({
   selector: 'app-point-of-sale',
@@ -13,35 +13,33 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class PointOfSalePage implements OnInit {
 
-  products: ProductDto[] = [];
-  productsInCart: ProductDto[] = [];
-  completeProductSale: ProductDto[] = [];
-  array: any;
-  noProductsFound = false;
-  showProductList = false;
-  public page = 0;
-  public totalPages = 0;
-  public limit = 100;
+  public products: ProductDto[] = [];
+  public productsInCart: ProductDto[] = [];
+  public orderProducts: OrderProductDto[] = [];
+  public array: any;
+  public noProductsFound = false;
+  public showProductList = false;
+  public submitted = false;
   public sortOrder = 'ASC';
   public sortBy = 'productId';
   public productName = '';
   public supplierName = 'All';
   public requirePrescription = null;
   public category = 'All';
+  public value = '0';
+  public oldValue = '0';
   public totalProducts: number;
-  value = '0';
-  oldValue = '0';
-
   public boxes: number;
   public units: number;
   public subTotal = 0;
   public paid = 0;
-
-  boxesOrderd = 0;
-  unitsOrdered = 0;
-
-  lastOperator = 'x';
-  readyForNewInput = true;
+  public boxesOrderd = 0;
+  public unitsOrdered = 0;
+  public page = 0;
+  public totalPages = 0;
+  public limit = 100;
+  public lastOperator = 'x';
+  public readyForNewInput = true;
   numberGroups = [
     [7, 8, 9, 'x'],
     [4, 5, 6, '-'],
@@ -52,16 +50,17 @@ export class PointOfSalePage implements OnInit {
   constructor(
     private apiService: ApiService,
     private emittersService: EmittersService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastCtrl: ToastController,
   ) { }
 
   ngOnInit() {
+    this.orderProducts.productDto = [];
   }
 
   searchByProductName(productName: string) {
     this.productName = productName;
     this.getAllProductsFromDB();
-    this.completeSale();
   }
 
   getAllProductsFromDB() {
@@ -71,7 +70,6 @@ export class PointOfSalePage implements OnInit {
     } else {
       this.showProductList = true;
       this.products = [];
-      // tslint:disable-next-line: max-line-length
       this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
         (data = FilterProductListDto) => {
           this.products = [...this.products, ...data.products];
@@ -93,8 +91,18 @@ export class PointOfSalePage implements OnInit {
     this.apiService.getProductById(productId).subscribe(
       (data = ProductDto) => {
         this.productsInCart.push(data);
+        this.orderProducts.push({
+          orderProductId: null,
+          productDto: data,
+          productName: null,
+          boxesOrdered: null,
+          unitsOrdered: null,
+          totalPrice: null
 
-        this.productsInCart.forEach((element, index) => {
+        });
+        console.log(this.orderProducts)
+        this.orderProducts.productDto.push(this.productsInCart);
+        this.productsInCart.forEach((product, index) => {
           if (this.productsInCart[index].boxesOrdered == null || this.productsInCart[index].unitsOrdered == null) {
             this.productsInCart[index].boxesOrdered = 0;
             this.productsInCart[index].unitsOrdered = 0;
@@ -118,38 +126,83 @@ export class PointOfSalePage implements OnInit {
 
   calculateSubTotal() {
     this.subTotal = 0;
-    this.productsInCart.forEach((element, index) => {
-      // tslint:disable-next-line: max-line-length
+    this.productsInCart.forEach((product, index) => {
       this.productsInCart[index].total = ((this.productsInCart[index].boxesOrdered * this.productsInCart[index].pricePerBox) + (this.productsInCart[index].unitsOrdered * this.productsInCart[index].pricePerUnit));
       this.subTotal = this.subTotal + this.productsInCart[index].total;
     });
   }
 
-  completeSale() {
-    this.productsInCart.forEach((element, index) => {
-      this.productsInCart[index].box = (this.productsInCart[index].box - this.productsInCart[index].boxesOrdered);
-      this.productsInCart[index].unitsTotal = (this.productsInCart[index].unitsTotal - this.productsInCart[index].unitsOrdered);
+  openConfirmationModal() {
+    this.productsInCart.forEach((product, index) => {
+      this.orderProducts[index].productName = this.productsInCart[index].productName;
+      this.orderProducts[index].boxesOrdered = this.productsInCart[index].boxesOrdered;
+      this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox ) + this.productsInCart[index].unitsOrdered;
+      this.orderProducts[index].totalPrice = this.productsInCart[index].total;
     });
+    this.modalController.create({
+      component: ConfirmationModalPage,
+      cssClass: 'confirmation-modal-container',
+      componentProps: {
+        orderProductDtos: this.orderProducts,
+        totalPrice: this.subTotal
+      },
+      backdropDismiss: false
+    }).then((modalElement) => {
+      modalElement.present();
+    });
+  }
 
+  completeSale() {
     const order = {
       cashierName: 'Awad',
       customerName: 'Awad',
       orderDate: new Date(),
-      productName: 'Test',
-      quantityOrderedBox: 1,
-      quantityOrderedUnit: 1,
-      products: this.productsInCart,
-      totalPrice: 1
+      orderProductDtos: this.orderProducts,
+      totalPrice: this.subTotal
     };
 
     console.log(order);
 
-    // this.apiService.saveOrder(order).subscribe(
-    //   data => {
-    //   },
-    //   error => {
-    //   }
-    // );
+    this.apiService.saveOrder(order).subscribe(
+      data => {
+      },
+      error => {
+        this.successMsg();
+        this.products = [];
+        this.productsInCart = [];
+      }
+    );
+  }
+
+  newSale() {
+    this.products = [];
+    this.productName = '';
+    this.showProductList = false;
+    this.productsInCart = [];
+  }
+
+  // successful message
+  async successMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Sale has been completed successfully',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  // unsuccessful message
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Something went wrong with the transaction',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
   }
 
   // calculator

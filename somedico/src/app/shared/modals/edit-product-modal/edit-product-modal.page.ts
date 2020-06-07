@@ -12,24 +12,22 @@ import { EmittersService } from 'src/app/services/emitters.service';
 })
 export class EditProductModalPage implements OnInit {
 
-  editProductForm: FormGroup;
-
-  productId: number;
-  productName: string;
-  description: string;
-  dosage: string;
-  category: string;
-  box: number;
-  unitsPerBox: number;
-  unitsTotal: number;
-  pricePerBox: number;
-  pricePerUnit: number;
-  requirePrescription: boolean;
-  supplier: SupplierDto;
-  supplierId: number;
-  supplierName: string;
-
-  submitted = false;
+  public editProductForm: FormGroup;
+  public productId: number;
+  public productName: string;
+  public description: string;
+  public dosage: string;
+  public category: string;
+  public box: number;
+  public unitsPerBox: number;
+  public unitsTotal: number;
+  public pricePerBox: number;
+  public pricePerUnit: number;
+  public requirePrescription: boolean;
+  public supplier: SupplierDto;
+  public supplierId: number;
+  public supplierName: string;
+  public submitted = false;
 
   constructor(
     private modalController: ModalController,

@@ -4,57 +4,68 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="productName" placeholder="Product Name" type="text"></ion-input>
+            <ion-label position="floating" color="medium">Product Name</ion-label>
+            <ion-input formControlName="productName" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="description" placeholder="Description" type="text"></ion-input>
+            <ion-label position="floating" color="medium">Description</ion-label>
+            <ion-input formControlName="description" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="dosage" placeholder="Dosage" type="text"></ion-input>
+            <ion-label position="floating" color="medium">Dosage</ion-label>
+            <ion-input formControlName="dosage" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="category" placeholder="Category" type="text"></ion-input>
+            <ion-label position="floating" color="medium">Category</ion-label>
+            <ion-input formControlName="category" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="box" placeholder="Box" type="number"></ion-input>
+            <ion-label position="floating" color="medium">Box</ion-label>
+            <ion-input formControlName="box" type="number"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="unitsPerBox" placeholder="Units Per Box" type="number"></ion-input>
+            <ion-label position="floating" color="medium">Units Per Box</ion-label>
+            <ion-input formControlName="unitsPerBox" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+        <!-- <ion-col>
+          <ion-item>
+            <ion-label position="floating" color="medium">Total Units</ion-label>
+            <ion-input formControlName="unitsTotal" value="unitsPerBox * box" type="number"></ion-input>
+          </ion-item>
+        </ion-col> -->
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" color="medium">Price Per Box</ion-label>
+            <ion-input formControlName="pricePerBox" type="number"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="unitsTotal" placeholder="Total Units" type="number"></ion-input>
+            <ion-label position="floating" color="medium">Price Per Unit</ion-label>
+            <ion-input formControlName="pricePerUnit" type="number"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input formControlName="pricePerBox" placeholder="Price Per Box" type="number"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-input formControlName="pricePerUnit" placeholder="Price Per Unit" type="number"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-input formControlName="requirePrescription" placeholder="Require Prescription" type="text"></ion-input>
+            <ion-label position="floating" color="medium">Require Prescription</ion-label>
+            <ion-input formControlName="requirePrescription" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col formGroupName="supplier">
           <ion-item>
-            <ion-input formControlName="supplierId" placeholder="Supplier Id" type="number"></ion-input>
+            <ion-label position="floating" color="medium">Supplier Id</ion-label>
+            <ion-input formControlName="supplierId" type="number"></ion-input>
           </ion-item>
         </ion-col>
         <!-- <ion-col formGroupName="supplier">

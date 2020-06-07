@@ -42,7 +42,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     this.getAllProductsFromDB();
   }
 
-  openAddModal(productId: number) {
+  openEditModal(productId: number) {
     this.apiService.getProductById(productId).subscribe(
       data => {
         this.product = data;
@@ -51,7 +51,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.modalController.create({
         component: EditProductModalPage,
-        cssClass: 'modal-container',
+        cssClass: 'edit-modal-container',
         componentProps: {
           productId: this.product.productId,
           productName: this.product.productName,
@@ -71,6 +71,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
       });
     }, 100);
   }
+
 
   ngAfterViewInit(): void {
     this.submitAddProductFormSubscription = this.emittersService.emitAddProductEventEmmiter.subscribe(data => {
@@ -109,7 +110,6 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
       this.products = [];
       this.totalProducts = 0;
     }
-    // tslint:disable-next-line: max-line-length
     this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterProductListDto) => {
         this.products = [...this.products, ...data.products];

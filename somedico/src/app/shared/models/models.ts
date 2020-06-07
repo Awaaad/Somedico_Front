@@ -1,4 +1,5 @@
 import { NumberSymbol } from '@angular/common';
+import { IonDatetime } from '@ionic/angular';
 
 export class ProductDto {
     productId: number;
@@ -46,9 +47,16 @@ export class OrderDto {
     cashierName: string;
     customerName: string;
     orderDate: Date;
+    paid?: boolean;
+    orderProductDtos: OrderProductDto[];
+    totalPrice: number;
+}
+
+export class OrderProductDto {
+    orderProductId: number;
+    productDto: ProductDto;
     productName: string;
-    quantityOrderedBox: number;
-    quantityOrderedUnit: NumberSymbol;
-    products: ProductDto[];
+    boxesOrdered: number;
+    unitsOrdered: number;
     totalPrice: number;
 }

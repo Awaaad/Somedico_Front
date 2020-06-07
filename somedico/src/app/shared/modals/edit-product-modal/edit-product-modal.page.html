@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="toolbar-content">
       <div class="title">
-        <img class="header-logo" src='../../../../assets/header_icons/edit.png'>
+        <img class="header-logo" src='./assets/header_icons/edit.png'>
         <h3 class="header-nav-home">Edit Product</h3>
       </div>
       <div class="modal-close">
@@ -13,105 +13,104 @@
 </ion-header>
 
 <ion-content>
-  <div id="addVenue" class="addVenue">
-    <form [formGroup]="editProductForm">
-      <ion-row>
-        <ion-col col-md-12 size="12" size-sm>
-          <ion-item>
-            <ion-label position="stacked" color="medium">*Product Name</ion-label>
-            <ion-input formControlName="productName" type="text" value="{{productName}}"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+  <form [formGroup]="editProductForm">
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Product Name</ion-label>
+          <ion-input formControlName="productName" type="text" value="{{productName}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-      <ion-row>
-        <ion-col col-md-12 size="12" size-sm>
-          <ion-item>
-            <ion-label position="stacked" color="medium">*Description</ion-label>
-            <ion-input formControlName="description" type="text" value="{{description}}"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Description</ion-label>
+          <ion-textarea formControlName="description" type="text" value="{{description}}"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-          
-        <ion-row>
-          <ion-col col-md-12 size="12" size-sm>
-            <ion-item>
-              <ion-label position="stacked" color="medium">*Dosage</ion-label>
-              <ion-input formControlName="dosage" type="text" value="{{dosage}}"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
 
-          
-          <ion-row>
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Category</ion-label>
-                <ion-input formControlName="category" type="text" value="{{category}}"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Dosage</ion-label>
+          <ion-input formControlName="dosage" type="text" value="{{dosage}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-          
-          <ion-row>
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Box</ion-label>
-                <ion-input formControlName="box" type="text" value="{{box}}"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
 
-          
-          <ion-row>
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Units Per Box</ion-label>
-                <ion-input formControlName="unitsPerBox" type="text" value="{{unitsPerBox}}"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Category</ion-label>
+          <ion-input formControlName="category" type="text" value="{{category}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-          
-          <ion-row>
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Price Per Box</ion-label>
-                <ion-input formControlName="pricePerBox" type="text" value="{{pricePerBox}}"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
 
-          
-          <ion-row>
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Price Per Unit</ion-label>
-                <ion-input formControlName="pricePerUnit" type="text" value="{{pricePerUnit}}"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Box</ion-label>
+          <ion-input formControlName="box" type="text" value="{{box}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-   
-          <ion-row>
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Require Prescription</ion-label>
-                <ion-input formControlName="requirePrescription" type="text" value="{{requirePrescription}}"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
 
-          <ion-row formGroupName="supplier">
-            <ion-col col-md-12 size="12" size-sm>
-              <ion-item>
-                <ion-label position="stacked" color="medium">*Supplier Id</ion-label>
-                <ion-input formControlName="supplierId" type="number"  value="{{supplierId}}"></ion-input>
-              </ion-item>
-            </ion-col>
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Units Per Box</ion-label>
+          <ion-input formControlName="unitsPerBox" type="text" value="{{unitsPerBox}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-          <!-- <div class="error-messages">
+
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Price Per Box</ion-label>
+          <ion-input formControlName="pricePerBox" type="text" value="{{pricePerBox}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Price Per Unit</ion-label>
+          <ion-input formControlName="pricePerUnit" type="text" value="{{pricePerUnit}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Require Prescription</ion-label>
+          <ion-input formControlName="requirePrescription" type="text" value="{{requirePrescription}}"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row formGroupName="supplier">
+      <ion-col col-md-12 size="12" size-sm>
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Supplier Id</ion-label>
+          <ion-input formControlName="supplierId" type="number" value="{{supplierId}}"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <!-- <div class="error-messages">
             <ng-container *ngFor="let error of errorMessages.skillName">
               <div class="error-message"
                 *ngIf="formAddSkill.get('skillName').hasError(error.type) && (formAddSkill.get('skillName').dirty || formAddSkill.get('skillName').touched)">
@@ -119,16 +118,15 @@
               </div>
             </ng-container>
           </div> -->
-      </ion-row>
-  
-      <!-- <div class="option-button ion-text-right">
+    </ion-row>
+
+    <!-- <div class="option-button ion-text-right">
         <ion-button class="cancel-btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
         <ion-button class='btn' color="dark">Save</ion-button>
       </div> -->
-      <div class="action-button ion-text-right">
-        <ion-button (click)="closeModal()" class="add-product-btn" color="danger">Cancel</ion-button>
-        <ion-button (click)="onSubmit()" class="submit-btn" color="secondary">Save</ion-button>
-      </div>
-    </form>
-  </div>
+    <div class="action-button ion-text-right">
+      <ion-button (click)="closeModal()" class="add-product-btn" color="danger">Cancel</ion-button>
+      <ion-button (click)="onSubmit()" class="submit-btn" color="secondary">Save</ion-button>
+    </div>
+  </form>
 </ion-content>
