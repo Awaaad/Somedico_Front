@@ -22,6 +22,9 @@ export class ProductDto {
 export class SupplierDto {
     supplierId: number;
     supplierName: string;
+    email: string;
+    telephoneNumber: number;
+    address: string;
 }
 
 export class UserDto {
@@ -34,7 +37,11 @@ export class UserDto {
 }
 
 export class ProductListDto {
-    products: ProductDto[];
+    productDtos: ProductDto[];
+}
+
+export class SupplierListDto {
+    supplierDtos: SupplierDto[];
 }
 
 export class FilterProductListDto {
@@ -45,6 +52,12 @@ export class FilterProductListDto {
 
 export class FilterOrderListDto {
     orderDtos: OrderDto[];
+    totalElements: number;
+    totalPages: number;
+}
+
+export class FilterSupplierListDto {
+    supplierDtos: SupplierDto[];
     totalElements: number;
     totalPages: number;
 }

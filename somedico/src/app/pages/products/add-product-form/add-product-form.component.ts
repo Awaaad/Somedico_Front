@@ -10,8 +10,8 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./add-product-form.component.scss'],
 })
 export class AddProductFormComponent implements OnInit {
-  addProductForm: FormGroup;
-  submitted = false;
+  public addProductForm: FormGroup;
+  public submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,7 +62,7 @@ export class AddProductFormComponent implements OnInit {
 
   save() {
     const products = {
-      products: this.addProductForm.controls.products.value
+      productDtos: this.addProductForm.controls.products.value
     };
     this.addProductForm.controls.products.value.forEach(product => {
       product.unitsTotal = product.unitsPerBox * product.box;

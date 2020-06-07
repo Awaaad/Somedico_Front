@@ -1,0 +1,40 @@
+<form [formGroup]="addSupplierForm">
+  <div formArrayName="suppliers" *ngFor="let supplier of suppliersFields.controls; let i = index">
+    <div [formGroupName]="i">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" color="medium">Supplier Name</ion-label>
+            <ion-input formControlName="supplierName" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" color="medium">Email Address</ion-label>
+            <ion-input formControlName="email" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" color="medium">Telephone Number</ion-label>
+            <ion-input formControlName="telephoneNumber" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" color="medium">Address</ion-label>
+            <ion-input formControlName="address" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <div *ngIf="suppliersFields.length > 1" class="remove-item">
+          <ion-icon (click)="removeSupplier(i)" class="delete-product-btn" name="trash"></ion-icon>
+        </div>
+      </ion-row>
+    </div>
+  </div>
+  <div class="action-button">
+    <ion-button (click)="addSupplier()" class="add-product-btn" color="danger">Add Supplier</ion-button>
+    <ion-button (click)="onSubmit()" class="submit-btn" color="secondary">Save</ion-button>
+  </div>
+</form>
+

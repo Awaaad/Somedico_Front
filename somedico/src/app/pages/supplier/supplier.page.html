@@ -9,11 +9,59 @@
           <img class="header-logo" src='./assets/header_icons/supplier.png'>
           <h3 class="header-nav-supplier">Supplier</h3>
         </div>
+        <div class="add-button">
+          <ion-button class="add-btn" color='danger' (click)="scroll(target)">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </div>
       </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-row>
+    <ion-col size="6">
+      <div class="search-container">
+        <ion-searchbar placeholder="Search..." type="text" #supplierName
+          (ionInput)="searchBySupplierName(supplierName.value)"></ion-searchbar>
+      </div>
+    </ion-col>
+  </ion-row>
 
+  <div class="product-table" *ngIf="true">
+    <!-- new table design -->
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-1">Supplier Name</div>
+        <div class="col col-2">Email Address</div>
+        <div class="col col-3">Telephone Number</div>
+        <div class="col col-4">Address (Location)</div>
+      </li>
+      <li class="table-row" *ngFor="let supplier of suppliers">
+        <div class="col col-1" data-label="Supplier Name">{{supplier.supplierName}}</div>
+        <div class="col col-2" data-label="Email Address">{{supplier.email}}</div>
+        <div class="col col-3" data-label="Telephone Number">{{supplier.telephoneNumber}}</div>
+        <div class="col col-4" data-label="Address (Location)">{{supplier.address}}</div>
+      </li>
+    </ul>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more products...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <div #target>
+    <ion-card>
+      <ion-card-content>
+        <div class="container">
+          <div class="title">
+            <img class="subtitle-logo" src='./assets/icon/add-supplier.png'>
+            <h5>Add Supplier</h5>
+          </div>
+        </div>
+        <app-add-supplier-form></app-add-supplier-form>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

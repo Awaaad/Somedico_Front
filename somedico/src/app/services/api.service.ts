@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductDto, ProductListDto, FilterProductListDto, OrderDto, OrderProductDto, FilterOrderListDto } from '../shared/models/models';
+import { ProductDto, ProductListDto, FilterProductListDto, OrderDto, OrderProductDto, FilterOrderListDto, FilterSupplierListDto, SupplierListDto } from '../shared/models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -47,5 +47,15 @@ export class ApiService {
   getAllOrdersThroughFilter(customerName: string, cashierName: string, pageNumber: number, pageSize: number, sortOrder: string, sortBy: string): Observable<FilterOrderListDto[] | any> {
     return this.http.get<FilterOrderListDto[] | any>
       (this.baseUrl + 'order/filter/?customerName=' + customerName + '&cashierName=' + cashierName + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);
+  }
+
+  // supplier
+  getAllSuppliersThroughFilter(supplierName: string, pageNumber: number, pageSize: number, sortOrder: string, sortBy: string): Observable<FilterSupplierListDto[] | any> {
+    return this.http.get<FilterSupplierListDto[] | any>
+      (this.baseUrl + 'supplier/filter/?supplierName=' + supplierName + '&cashierName=' + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);
+  }
+
+  saveAllSuppliers(supplierListDto: SupplierListDto): Observable<SupplierListDto> {
+    return this.http.post<SupplierListDto>(this.baseUrl + 'supplier/saveSuppliers', supplierListDto);
   }
 }

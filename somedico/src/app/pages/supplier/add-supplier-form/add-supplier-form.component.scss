@@ -1,0 +1,32 @@
+@import '../../../shared/styles/common.scss';
+
+.remove-item {
+    padding-top: 30px;
+
+    .delete-product-btn {
+        font-size: 22px;
+
+        &:hover {
+            cursor: pointer;
+            color: red;
+        }
+    }
+}
+
+// ion-label {
+//     color: rgb(151, 145, 145) !important;
+
+//     &:focus {
+//         color: blue !important;
+//     }
+// }
+
+.action-button {
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .add-product-btn {
+        margin-right: 5px;
+    }
+}
