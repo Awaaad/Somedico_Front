@@ -14,11 +14,11 @@ import { EditProductModalPage } from '../../shared/modals/edit-product-modal/edi
 export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
-  products: ProductDto[] = [];
-  product: ProductDto;
-  showFilter = false;
-  refreshProductList: boolean;
-  noProductsFound = false;
+  public products: ProductDto[] = [];
+  public product: ProductDto;
+  public showFilter = false;
+  public refreshProductList: boolean;
+  public noProductsFound = false;
   public page = 0;
   public totalPages = 0;
   public limit = 20;
@@ -112,7 +112,8 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     }
     this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterProductListDto) => {
-        this.products = [...this.products, ...data.products];
+        console.log(data)
+        this.products = [...this.products, ...data.productDtos];
 
         this.totalPages = data.totalPages;
         this.totalProducts = this.totalProducts + data.totalElements;

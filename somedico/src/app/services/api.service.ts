@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductDto, ProductListDto, FilterProductListDto, OrderDto } from '../shared/models/models';
+import { ProductDto, ProductListDto, FilterProductListDto, OrderDto, OrderProductDto, FilterOrderListDto } from '../shared/models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  // products
   getAllProducts(): Observable<ProductDto[]> {
     return this.http.get<ProductDto[]>(this.baseUrl + '/product/all');
   }
@@ -33,7 +34,18 @@ export class ApiService {
     return this.http.put<ProductDto>(this.baseUrl + 'product/editProduct', productDto);
   }
 
+  // point of sale
   saveOrder(orderDto: OrderDto) {
     return this.http.post(this.baseUrl + 'order/saveOrder', orderDto);
+  }
+
+  // order history
+  getAllOrders(): Observable<OrderDto[]> {
+    return this.http.get<OrderDto[]>(this.baseUrl + '/order/all');
+  }
+
+  getAllOrdersThroughFilter(customerName: string, cashierName: string, pageNumber: number, pageSize: number, sortOrder: string, sortBy: string): Observable<FilterOrderListDto[] | any> {
+    return this.http.get<FilterOrderListDto[] | any>
+      (this.baseUrl + 'order/filter/?customerName=' + customerName + '&cashierName=' + cashierName + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);
   }
 }

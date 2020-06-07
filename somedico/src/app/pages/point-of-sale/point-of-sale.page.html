@@ -7,7 +7,7 @@
       <div class="router-links">
         <div class="title">
           <img class="header-logo" src='./assets/header_icons/point-of-sale.png'>
-          <h3 class="header-nav-products">Point of Sale</h3>
+          <h3 class="header-nav-point-of-sale">Point of Sale</h3>
         </div>
       </div>
     </ion-title>
@@ -31,39 +31,6 @@
       </div>
     </ion-col>
   </ion-row>
-  <!-- Search Result -->
-  <!-- <div class="search-result wrapper-content">
-    <table class="rwd-table" *ngIf="showProductList">
-      <tr>
-        <th class="th-left">ID</th>
-        <th>Product Name</th>
-        <th>Dosage</th>
-        <th>Category</th>
-        <th>Box</th>
-        <th>Units Per Box</th>
-        <th>Price Per Box</th>
-        <th>Price Per Unit</th>
-        <th>Require Prescription</th>
-        <th></th>
-      </tr>
-      <tr class="table-content" *ngFor="let product of products">
-        <td class="td-left" data-th="ID">{{product.productId}}</td>
-        <td data-th="Product Name">{{product.productName}}</td>
-        <td data-th="Dosage">{{product.dosage}}</td>
-        <td data-th="Category">{{product.category}}</td>
-        <td data-th="Box">{{product.box}}</td>
-        <td data-th="Units Per Box">{{product.unitsPerBox}}</td>
-        <td data-th="Price Per Box">Rs {{product.pricePerBox}}</td>
-        <td data-th="Price Per Unit">Rs {{product.pricePerUnit}}</td>
-        <td data-th="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</td>
-        <td class="add" data-th="Add">
-          <ion-button (click)="addProductToCart(product.productId)" class="add-btn" color='danger'>
-            <ion-icon name="add"></ion-icon>
-          </ion-button>
-        </td>
-      </tr>
-    </table>
-  </div> -->
 
   <div class="product-table" *ngIf="showProductList">
     <!-- new table design -->

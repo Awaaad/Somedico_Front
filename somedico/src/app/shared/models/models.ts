@@ -38,12 +38,19 @@ export class ProductListDto {
 }
 
 export class FilterProductListDto {
-    products: ProductDto[];
+    productDtos: ProductDto[];
+    totalElements: number;
+    totalPages: number;
+}
+
+export class FilterOrderListDto {
+    orderDtos: OrderDto[];
     totalElements: number;
     totalPages: number;
 }
 
 export class OrderDto {
+    orderId?: number;
     cashierName: string;
     customerName: string;
     orderDate: Date;

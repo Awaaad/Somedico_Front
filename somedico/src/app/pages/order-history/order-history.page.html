@@ -1,9 +1,83 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>order-history</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="router-links">
+        <div class="title">
+          <img class="header-logo" src='./assets/header_icons/order-history.png'>
+          <h3 class="header-nav-order-history">Order History</h3>
+        </div>
+      </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-row>
+    <ion-col size="6">
+      <div class="search-container">
+        <ion-searchbar placeholder="Search..." type="text" #customerName
+          (ionInput)="searchByCustomerName(customerName.value)"></ion-searchbar>
+      </div>
+    </ion-col>
+    <ion-col size="6">
+      <div class="filters">
+        <ion-button *ngIf="!showFilter" color="dark" class="show-filter-btn" (click)="showOrHideFilter()">Show more
+          Filters</ion-button>
+        <ion-button *ngIf="showFilter" color="dark" class="show-filter-btn" (click)="showOrHideFilter()">Show less
+          Filters</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="showFilter" class="filter-section">
+    <ion-col size="3" class="ion-padding">
+      <ion-item class="venue-input">
+        <ion-label position="floating" color="medium">Category</ion-label>
+        <ion-select (ionChange)="filterByCategory($event)" interface="popover" class="ion-float-left">
+          <ion-select-option value='All' selected="selected">All</ion-select-option>
+          <ion-select-option value='Test'>Test</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="3" class="ion-padding">
+      <ion-item class="venue-input">
+        <ion-label position="floating" color="medium">Supplier Name</ion-label>
+        <ion-select (ionChange)="filterBySupplierName($event)" interface="popover" class="ion-float-left">
+          <ion-select-option value="All" selected="selected">All</ion-select-option>
+          <ion-select-option value="Blight">Blight</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <div class="product-table" *ngIf="true">
+    <!-- new table design -->
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-1">Order ID</div>
+        <div class="col col-2">Customer Name</div>
+        <div class="col col-3">Cashier Name</div>
+        <div class="col col-4">Order Date</div>
+        <div class="col col-5">Amount</div>
+        <div class="col col-6">Paid</div>
+      </li>
+      <li class="table-row" *ngFor="let order of orders">
+        <div class="col col-1" data-label="Order Id">{{order.orderId}}</div>
+        <div class="col col-2" data-label="Customer Name">{{order.customerName}}</div>
+        <div class="col col-3" data-label="Cashier Name">{{order.cashierName}}</div>
+        <div class="col col-4" data-label="Order Date">{{order.orderDate}}</div>
+        <div class="col col-5" data-label="Amount">{{order.totalPrice}}</div>
+        <div class="col col-6" data-label="Paid">Yes</div>
+      </li>
+    </ul>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more products...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
 
 </ion-content>
