@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrderHistoryPageRoutingModule } from './order-history-routing.module';
 
 import { OrderHistoryPage } from './order-history.page';
+import { DateFormatterPipe } from 'src/app/services/pipes/date-formatter.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,12 @@ import { OrderHistoryPage } from './order-history.page';
     IonicModule,
     OrderHistoryPageRoutingModule
   ],
-  declarations: [OrderHistoryPage]
+  declarations: [
+    OrderHistoryPage,
+    DateFormatterPipe
+  ],
+  exports: [
+    DateFormatterPipe
+  ]
 })
 export class OrderHistoryPageModule {}

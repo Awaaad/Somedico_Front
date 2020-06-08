@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController, IonInfiniteScroll } from '@ionic/angular';
 import { OrderDto, FilterOrderListDto } from 'src/app/shared/models/models';
+import { UtilsService } from 'src/app/services/utils/utils.service';
 
 @Component({
   selector: 'app-order-history',
@@ -22,12 +23,13 @@ export class OrderHistoryPage implements OnInit {
   public totalOrders: number;
   public customerName = '';
   public cashierName = 'All';
-
+  public date: string;
 
   constructor(
     private apiService: ApiService,
     private emittersService: EmittersService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -55,9 +57,7 @@ export class OrderHistoryPage implements OnInit {
     }
     this.apiService.getAllOrdersThroughFilter(this.customerName, this.cashierName, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterOrderListDto) => {
-        console.log(data);
         this.orders = [...this.orders, ...data.orderDtos];
-
         this.totalPages = data.totalPages;
         this.totalOrders = this.totalOrders + data.totalElements;
 
