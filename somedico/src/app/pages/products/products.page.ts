@@ -112,7 +112,6 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     }
     this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterProductListDto) => {
-        console.log(data)
         this.products = [...this.products, ...data.productDtos];
 
         this.totalPages = data.totalPages;

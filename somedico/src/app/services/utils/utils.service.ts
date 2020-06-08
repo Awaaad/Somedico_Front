@@ -14,5 +14,4 @@ export class UtilsService {
   public formatTimeBasedOnUsersBrowser(dateToFormat: Date): string {
     return new Date(dateToFormat).toLocaleString(navigator.language, { hour: '2-digit', minute: '2-digit' });
   }
-
 }
