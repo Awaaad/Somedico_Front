@@ -36,7 +36,7 @@ export class SupplierPage implements OnInit {
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
   }
-  
+
   searchBySupplierName(supplierName: string) {
     this.supplierName = supplierName;
     this.getAllSuppliersFromDB();
