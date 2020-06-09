@@ -72,4 +72,8 @@ export class ApiService {
     return this.http.get<ProductDto | any>(this.baseUrl + 'orderProduct/orderId/' + orderId);
   }
 
+  editOrderPayment(orderDto: OrderDto): Observable<OrderDto> {
+    return this.http.put<OrderDto>(this.baseUrl + 'order/editOrder', orderDto);
+  }
+
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
-import { ModalController, IonInfiniteScroll } from '@ionic/angular';
+import { ModalController, IonInfiniteScroll, ToastController } from '@ionic/angular';
 import { OrderDto, FilterOrderListDto } from 'src/app/shared/models/models';
 import { UtilsService } from 'src/app/services/utils/utils.service';
 import { Router } from '@angular/router';
@@ -31,6 +31,7 @@ export class OrderHistoryPage implements OnInit {
     private emittersService: EmittersService,
     private modalController: ModalController,
     private utilsService: UtilsService,
+    private toastCtrl: ToastController,
     private router: Router
   ) { }
 
@@ -96,6 +97,51 @@ export class OrderHistoryPage implements OnInit {
 
   routeTo(orderId: number) {
     this.router.navigate(['/order-details', orderId]);
+  }
+
+  async successMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Payment successfully made',
+      position: 'top',
+      color: 'success',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  // unsuccessful message
+  async unsuccessMsg() {
+    const toast = await this.toastCtrl.create({
+      message: 'Ooops something went wrong',
+      position: 'top',
+      color: 'danger',
+      duration: 2000,
+      cssClass: 'toast-custom'
+    });
+    toast.present();
+  }
+
+  makePayment(order: OrderDto) {
+    order.paid = true;
+    this.apiService.editOrderPayment(order).subscribe(
+      data => {
+      },
+      error => {
+      }
+    );
+    this.getAllOrdersFromDB();
+  }
+
+  onSubmit() {
+    // this.submitted = true;
+    // if (this.editSupplierForm.invalid) {
+    //   this.unsuccessMsg();
+    // } else {
+    //   this.saveEditedSupplier();
+    //   this.closeModal();
+    //   this.successMsg();
+    // }
   }
 
 }

@@ -78,7 +78,7 @@
           <img class="logo" src='./assets/icon/not-paid.png'>
         </div>
         <div *ngIf="order.paid === false" class="col col-7" data-label="Make Payment">
-          <ion-button color="warning" class="paid-btn">Paid</ion-button>
+          <ion-button color="warning" class="paid-btn" (click)="makePayment(order)">Paid</ion-button>
         </div>
         <div *ngIf="order.paid === true" class="col col-7" data-label="Make Payment">
         </div>
