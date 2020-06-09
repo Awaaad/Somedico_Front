@@ -42,19 +42,25 @@
             cursor: pointer;
             background-color: rgb(226, 226, 226);
         }
+        .edit:hover {
+            color: #1B1464;
+        }
     }
 
     .col-1 {
-      flex-basis: 25%;
+      flex-basis: 23%;
     }
     .col-2 {
-      flex-basis: 25%;
+      flex-basis: 23%;
     }
     .col-3 {
-      flex-basis: 25%;
+      flex-basis: 23%;
     }
     .col-4 {
-      flex-basis: 25%;
+      flex-basis: 23%;
+    }
+    .col-5 {
+      flex-basis: 2%;
     }
 
     @media all and (max-width: 767px) {

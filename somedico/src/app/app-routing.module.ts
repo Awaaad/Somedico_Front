@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'add-supplier',
     loadChildren: () => import('./pages/add-supplier/add-supplier.module').then( m => m.AddSupplierPageModule)
   },
+  {
+    path: 'edit-supplier-modal',
+    loadChildren: () => import('./shared/modals/edit-supplier-modal/edit-supplier-modal.module').then( m => m.EditSupplierModalPageModule)
+  },
 ];
 
 @NgModule({

@@ -16,7 +16,6 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
   ],
   declarations: [
     ProductsPage,
-    AddProductFormComponent
   ]
 })
 export class ProductsPageModule {}

@@ -10,7 +10,7 @@
           <h3 class="header-nav-products">Products</h3>
         </div>
         <div class="add-button">
-          <ion-button class="add-btn" color='danger' (click)="scroll(target)">
+          <ion-button class="add-btn" color='danger' (click)="routeTo()">
             <ion-icon name="add"></ion-icon>
           </ion-button>
         </div>
@@ -107,7 +107,7 @@
         <div class="col col-9" data-label="Price Per Unit">{{product.pricePerUnit}}</div>
         <div class="col col-10" data-label="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</div>
         <div class="col col-11" data-label="Supplier">{{product.supplier.supplierName}}</div>
-        <div class="col col-12" data-label="Edit" (click)="openEditModal(product.productId)">
+        <div class="col col-12 edit" data-label="Edit" (click)="openEditModal(product.productId)">
           <ion-icon class="edit-btn" name="create"></ion-icon>
         </div>
       </li>
@@ -126,7 +126,7 @@
     </div>
   </ion-card>
 
-  <div #target>
+  <!-- <div #target>
     <ion-card>
       <ion-card-content>
         <div class="container">
@@ -138,6 +138,6 @@
         <app-add-product-form></app-add-product-form>
       </ion-card-content>
     </ion-card>
-  </div>
+  </div> -->
 
 </ion-content>

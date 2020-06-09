@@ -1,19 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SupplierDto, FilterSupplierListDto } from 'src/app/shared/models/models';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
+import { Router } from '@angular/router';
+import { EditSupplierModalPage } from 'src/app/shared/modals/edit-supplier-modal/edit-supplier-modal.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.page.html',
   styleUrls: ['./supplier.page.scss'],
 })
-export class SupplierPage implements OnInit {
+export class SupplierPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
   public showFilter = false;
   public suppliers: SupplierDto[] = [];
+  public supplier: SupplierDto;
   public page = 0;
   public totalPages = 0;
   public limit = 15;
@@ -22,15 +26,29 @@ export class SupplierPage implements OnInit {
   public totalSuppliers: number;
   public supplierName = '';
   public cashierName = 'All';
+  public refreshSupplierList = false;
+
+  public submitEditSupplierFormSubscription: Subscription;
 
   constructor(
     private apiService: ApiService,
     private emittersService: EmittersService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getAllSuppliersFromDB();
+    this.submitEditSupplierFormSubscription = this.emittersService.emitEditSupplierEventEmmiter.subscribe(data => {
+      this.refreshSupplierList = data;
+      if (this.refreshSupplierList === true) {
+        this.suppliers = [];
+        this.getAllSuppliersFromDB();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.submitEditSupplierFormSubscription.unsubscribe();
   }
 
   ionViewWillEnter() {
@@ -39,6 +57,24 @@ export class SupplierPage implements OnInit {
 
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
+  }
+
+  openEditModal(supplierId: number) {
+    this.apiService.getSupplierById(supplierId).subscribe(
+      data => {
+        this.supplier = data;
+    });
+    setTimeout(() => {
+      this.modalController.create({
+        component: EditSupplierModalPage,
+        cssClass: 'edit-supplier-modal-container',
+        componentProps: {
+          supplier: this.supplier
+        }
+      }).then((modalElement) => {
+        modalElement.present();
+      });
+    }, 100);
   }
 
   searchBySupplierName(supplierName: string) {
@@ -85,5 +121,9 @@ export class SupplierPage implements OnInit {
       this.page++;
       this.getAllSuppliersFromDB(event, true);
     }, 500);
+  }
+
+  routeTo() {
+    this.router.navigate(['/add-supplier']);
   }
 }

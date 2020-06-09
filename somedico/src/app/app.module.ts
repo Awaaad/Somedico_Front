@@ -17,6 +17,7 @@ import { ApiService } from './services/api.service';
 import { EditProductModalPageModule } from './shared/modals/edit-product-modal/edit-product-modal.module';
 import { ConfirmationModalPageModule } from './shared/modals/confirmation-modal/confirmation-modal.module';
 import { DateFormatterPipe } from './services/pipes/date-formatter.pipe';
+import { EditSupplierModalPageModule } from './shared/modals/edit-supplier-modal/edit-supplier-modal.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DateFormatterPipe } from './services/pipes/date-formatter.pipe';
     AppRoutingModule,
     HttpClientModule,
     EditProductModalPageModule,
+    EditSupplierModalPageModule,
     ConfirmationModalPageModule
   ],
   providers: [

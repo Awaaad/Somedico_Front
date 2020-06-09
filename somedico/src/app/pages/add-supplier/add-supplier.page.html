@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-supplier</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="router-links">
+        <div class="title">
+          <img class="header-logo" src='./assets/icon/add-supplier.png'>
+          <h3 class="header-nav-products">Add Supplier</h3>
+        </div>
+        <div class="add-button">
+        </div>
+      </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-content>
+      <app-add-supplier-form></app-add-supplier-form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

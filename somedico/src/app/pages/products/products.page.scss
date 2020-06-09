@@ -109,6 +109,9 @@ h2 {
             cursor: pointer;
             background-color: rgb(226, 226, 226);
         }
+        .edit:hover {
+            color: $color-dark-green;
+        }
     }
 
     .col-1 {

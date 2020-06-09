@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { SupplierPageRoutingModule } from './supplier-routing.module';
-import { SupplierPage } from './supplier.page';
+
+import { EditSupplierModalPageRoutingModule } from './edit-supplier-modal-routing.module';
+
+import { EditSupplierModalPage } from './edit-supplier-modal.page';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SupplierPageRoutingModule,
+    EditSupplierModalPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [
-    SupplierPage,
-  ]
+  declarations: [EditSupplierModalPage]
 })
-export class SupplierPageModule {}
+export class EditSupplierModalPageModule {}

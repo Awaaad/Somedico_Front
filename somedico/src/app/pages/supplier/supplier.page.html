@@ -10,7 +10,7 @@
           <h3 class="header-nav-supplier">Supplier</h3>
         </div>
         <div class="add-button">
-          <ion-button class="add-btn" color='danger' (click)="scroll(target)">
+          <ion-button class="add-btn" color='danger' (click)="routeTo()">
             <ion-icon name="add"></ion-icon>
           </ion-button>
         </div>
@@ -37,12 +37,16 @@
         <div class="col col-2">Email Address</div>
         <div class="col col-3">Telephone Number</div>
         <div class="col col-4">Address (Location)</div>
+        <div class="col col-5"></div>
       </li>
       <li class="table-row" *ngFor="let supplier of suppliers">
         <div class="col col-1" data-label="Supplier Name">{{supplier.supplierName}}</div>
         <div class="col col-2" data-label="Email Address">{{supplier.email}}</div>
         <div class="col col-3" data-label="Telephone Number">{{supplier.telephoneNumber}}</div>
         <div class="col col-4" data-label="Address (Location)">{{supplier.address}}</div>
+        <div class="col col-5 edit" data-label="Edit" (click)="openEditModal(supplier.supplierId)">
+          <ion-icon class="edit-btn" name="create"></ion-icon>
+        </div>
       </li>
     </ul>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
@@ -51,7 +55,7 @@
     </ion-infinite-scroll>
   </div>
 
-  <div #target>
+  <!-- <div #target>
     <ion-card>
       <ion-card-content>
         <div class="container">
@@ -63,5 +67,5 @@
         <app-add-supplier-form></app-add-supplier-form>
       </ion-card-content>
     </ion-card>
-  </div>
+  </div> -->
 </ion-content>

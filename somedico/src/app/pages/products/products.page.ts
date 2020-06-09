@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { FilterProductListDto, ProductDto } from 'src/app/shared/models/models';
 import { IonInfiniteScroll, ToastController, ModalController } from '@ionic/angular';
 import { EditProductModalPage } from '../../shared/modals/edit-product-modal/edit-product-modal.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -35,7 +36,8 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private emittersService: EmittersService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.modalController.create({
         component: EditProductModalPage,
-        cssClass: 'edit-modal-container',
+        cssClass: 'edit-product-modal-container',
         componentProps: {
           productId: this.product.productId,
           productName: this.product.productName,
@@ -158,6 +160,10 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.submitAddProductFormSubscription.unsubscribe();
     this.submitEditProductFormSubscription.unsubscribe();
+  }
+
+  routeTo() {
+    this.router.navigate(['/add-product']);
   }
 
 }

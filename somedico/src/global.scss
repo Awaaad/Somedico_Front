@@ -275,7 +275,7 @@ ion-button {
     font-size: 15px;
 }
 
-.edit-modal-container .modal-wrapper {
+.edit-product-modal-container .modal-wrapper {
     height: 80% !important;
     position: absolute;
     display: block;
@@ -290,21 +290,36 @@ ion-button {
         width: 85% !important;
     }
 }
-
-.confirmation-modal-container .modal-wrapper {
-    height: 47% !important;
+.edit-supplier-modal-container .modal-wrapper {
+    height: 24em !important;
     position: absolute;
     display: block;
-    width: 40% !important;
+    width: 30em !important;
 
     @media only screen and (max-width: 600px) {
-        height: 100% !important;
-        width: 100% !important;
+        height: 24em !important;
+        width: 30em !important;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
-        height: 55% !important;
-        width: 50% !important;
+        width: 30em !important;
+    }
+}
+
+.confirmation-modal-container .modal-wrapper {
+    height: 26em !important;
+    position: absolute;
+    display: block;
+    width: 35em !important;
+
+    @media only screen and (max-width: 600px) {
+        height: 26em !important;
+        width: 35em !important;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        height: 26em !important;
+        width: 35em !important;
     }
 }
 

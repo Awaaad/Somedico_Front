@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductDto, ProductListDto, FilterProductListDto, OrderDto, OrderProductDto, FilterOrderListDto, FilterSupplierListDto, SupplierListDto } from '../shared/models/models';
+import { ProductDto, ProductListDto, FilterProductListDto, OrderDto, OrderProductDto, FilterOrderListDto, FilterSupplierListDto, SupplierListDto, SupplierDto } from '../shared/models/models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -55,8 +55,16 @@ export class ApiService {
       (this.baseUrl + 'supplier/filter/?supplierName=' + supplierName + '&cashierName=' + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);
   }
 
+  getSupplierById(supplierId: number): Observable<SupplierDto | any> {
+    return this.http.get<SupplierDto | any>(this.baseUrl + 'supplier/id/?supplierId=' + supplierId);
+  }
+
   saveAllSuppliers(supplierListDto: SupplierListDto): Observable<SupplierListDto> {
     return this.http.post<SupplierListDto>(this.baseUrl + 'supplier/saveSuppliers', supplierListDto);
+  }
+
+  editSupplier(supplierDto: SupplierDto): Observable<SupplierDto> {
+    return this.http.put<SupplierDto>(this.baseUrl + 'supplier/editSupplier', supplierDto);
   }
 
   // order details
