@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { UtilsService } from '../utils/utils.service';
 
 @Pipe({
-  name: 'activationHistoryDateFormatter'
+  name: 'DateFormatter'
 })
 export class DateFormatterPipe implements PipeTransform {
 

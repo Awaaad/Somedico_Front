@@ -16,13 +16,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { EditProductModalPageModule } from './shared/modals/edit-product-modal/edit-product-modal.module';
 import { ConfirmationModalPageModule } from './shared/modals/confirmation-modal/confirmation-modal.module';
+import { DateFormatterPipe } from './services/pipes/date-formatter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderNavComponent,
     SideNavComponent,
-    FooterComponent,
+    FooterComponent
   ],
   entryComponents: [],
   imports: [
@@ -39,6 +40,6 @@ import { ConfirmationModalPageModule } from './shared/modals/confirmation-modal/
     ApiService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

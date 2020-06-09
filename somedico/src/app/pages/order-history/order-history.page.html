@@ -65,11 +65,11 @@
         <div class="col col-6">Paid</div>
         <div class="col col-7"></div>
       </li>
-      <li class="table-row" *ngFor="let order of orders">
+      <li class="table-row" *ngFor="let order of orders" (click)="routeTo(order.orderId)"> 
         <div class="col col-1" data-label="Order Id">{{order.orderId}}</div>
         <div class="col col-2" data-label="Customer Name">{{order.customerName}}</div>
         <div class="col col-3" data-label="Cashier Name">{{order.cashierName}}</div>
-        <div class="col col-4" data-label="Order Date">{{order.orderDate | activationHistoryDateFormatter}}</div>
+        <div class="col col-4" data-label="Order Date">{{order.orderDate | DateFormatter}}</div>
         <div class="col col-5" data-label="Amount">{{order.totalPrice}}</div>
         <div *ngIf="order.paid === true" class="col col-6" data-label="Paid">
           <img class="logo" src='./assets/icon/paid.png'>

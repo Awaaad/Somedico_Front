@@ -4,6 +4,7 @@ import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController, IonInfiniteScroll } from '@ionic/angular';
 import { OrderDto, FilterOrderListDto } from 'src/app/shared/models/models';
 import { UtilsService } from 'src/app/services/utils/utils.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-history',
@@ -29,10 +30,15 @@ export class OrderHistoryPage implements OnInit {
     private apiService: ApiService,
     private emittersService: EmittersService,
     private modalController: ModalController,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.getAllOrdersFromDB();
+  }
+
+  ionViewWillEnter() {
     this.getAllOrdersFromDB();
   }
 
@@ -86,6 +92,10 @@ export class OrderHistoryPage implements OnInit {
 
   filterBySupplierName() {
 
+  }
+
+  routeTo(orderId: number) {
+    this.router.navigate(['/order-details', orderId]);
   }
 
 }

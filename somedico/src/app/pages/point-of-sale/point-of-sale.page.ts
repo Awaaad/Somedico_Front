@@ -108,6 +108,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
         this.orderProducts.push({
           orderProductId: null,
           productDto: data,
+          orderDto: null,
           productName: null,
           boxesOrdered: null,
           unitsOrdered: null,

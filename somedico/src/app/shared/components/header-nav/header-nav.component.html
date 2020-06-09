@@ -47,11 +47,25 @@
             <li>
               <a routerLink="/point-of-sale"><ion-icon name="calculator"></ion-icon>Point of Sale</a>
             </li>
-            <li>
-              <a routerLink="/products"> <ion-icon name="cube"></ion-icon>Products</a>
+            <li class="subnav"><span class="arrow"><ion-icon name="cube"></ion-icon>Products</span>
+              <ul class="nested">
+                <li>
+                  <a routerLink="/products"><ion-icon name="list"></ion-icon>Product List</a>
+                </li>
+                <li>
+                  <a routerLink="venue-job"><ion-icon name="add"></ion-icon>Add Product</a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a routerLink="/supplier"> <ion-icon name="briefcase"></ion-icon>Supplier</a>
+            <li class="subnav"><span class="arrow"><ion-icon name="briefcase"></ion-icon>Suppliers</span>
+              <ul class="nested">
+                <li>
+                  <a routerLink="/supplier"><ion-icon name="list"></ion-icon>Supplier List</a>
+                </li>
+                <li>
+                  <a routerLink="venue-job"><ion-icon name="add"></ion-icon>Add Supplier</a>
+                </li>
+              </ul>
             </li>
             <li>
               <a routerLink="/order-history"> <ion-icon name="albums"></ion-icon>Order History</a>

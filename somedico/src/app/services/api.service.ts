@@ -58,4 +58,10 @@ export class ApiService {
   saveAllSuppliers(supplierListDto: SupplierListDto): Observable<SupplierListDto> {
     return this.http.post<SupplierListDto>(this.baseUrl + 'supplier/saveSuppliers', supplierListDto);
   }
+
+  // order details
+  getOrderDetailsByOrderId(orderId: number): Observable<OrderProductDto | any> {
+    return this.http.get<ProductDto | any>(this.baseUrl + 'orderProduct/orderId/' + orderId);
+  }
+
 }

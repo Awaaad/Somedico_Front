@@ -1,0 +1,155 @@
+@import '../../shared/styles/common.scss';
+
+ion-card-content {
+    .main {
+        color: black;
+        font-size: 18px;
+    }
+
+    .sub {
+        color: black;
+        font-size: 17px;
+    }
+}
+
+.invoice-margin {
+    max-width: 70em;
+    margin: 20px auto;
+
+    .invoice {
+        margin-right: 10px;
+        margin-left: 10px;
+
+        .invoice-title {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid lightgray;
+
+            .invoice-logo {
+                display: flex;
+                align-items: center;
+
+                .logo-img {
+                    width: 48px;
+                    padding-right: 10px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                .logo-text {
+                    color: black;
+                    text-decoration: none;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .print {
+        float: right;
+        margin-right: 7px;
+    }
+
+    .invoice-subtitle {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .invoice-footer {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+.responsive-table {
+    padding-left: 0;
+    padding-right: 0;
+
+    li {
+        padding: 15px 0;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 17px;
+    }
+
+    .table-header {
+        color: black;
+        background-color: white;
+        font-size: 17px;
+        text-transform: none;
+        letter-spacing: 0.03em;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .col-1 {
+        flex-basis: 20%;
+    }
+
+    .col-2 {
+        flex-basis: 16%;
+    }
+
+    .col-3 {
+        flex-basis: 16%;
+    }
+
+    .col-4 {
+        flex-basis: 20%;
+    }
+
+    .col-5 {
+        flex-basis: 20%;
+    }
+
+    .col-6 {
+        flex-basis: 8%;
+    }
+
+    @media all and (max-width: 767px) {
+        .table-header {
+            display: none;
+        }
+
+        li {
+            display: block;
+        }
+
+        .col {
+
+            flex-basis: 100%;
+
+        }
+
+        .col {
+            display: flex;
+            padding: 10px 0;
+
+            &:before {
+                color: #6C7A89;
+                padding-right: 10px;
+                content: attr(data-label);
+                flex-basis: 50%;
+                text-align: right;
+            }
+        }
+    }
+}

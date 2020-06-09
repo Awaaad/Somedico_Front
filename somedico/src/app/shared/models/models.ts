@@ -75,6 +75,7 @@ export class OrderDto {
 export class OrderProductDto {
     orderProductId: number;
     productDto: ProductDto;
+    orderDto: OrderDto;
     productName: string;
     boxesOrdered: number;
     unitsOrdered: number;

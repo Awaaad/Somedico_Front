@@ -33,6 +33,10 @@ export class SupplierPage implements OnInit {
     this.getAllSuppliersFromDB();
   }
 
+  ionViewWillEnter() {
+    this.getAllSuppliersFromDB();
+  }
+
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
   }

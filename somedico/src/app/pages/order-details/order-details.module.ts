@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { OrderHistoryPageRoutingModule } from './order-history-routing.module';
-import { OrderHistoryPage } from './order-history.page';
+import { OrderDetailsPageRoutingModule } from './order-details-routing.module';
+import { OrderDetailsPage } from './order-details.page';
 import { SharedModule } from 'src/app/shared/module/shared.module';
 
 @NgModule({
@@ -11,11 +11,11 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    OrderHistoryPageRoutingModule,
+    OrderDetailsPageRoutingModule,
     SharedModule
   ],
   declarations: [
-    OrderHistoryPage,
+    OrderDetailsPage,
   ]
 })
-export class OrderHistoryPageModule {}
+export class OrderDetailsPageModule {}

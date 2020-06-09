@@ -21,7 +21,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   public noProductsFound = false;
   public page = 0;
   public totalPages = 0;
-  public limit = 20;
+  public limit = 50;
   public sortOrder = 'ASC';
   public sortBy = 'productId';
   public productName = '';
