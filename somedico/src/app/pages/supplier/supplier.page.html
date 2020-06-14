@@ -29,7 +29,7 @@
     </ion-col>
   </ion-row>
 
-  <div class="product-table" *ngIf="true">
+  <div class="product-table" *ngIf="!noSupplierFound">
     <!-- new table design -->
     <ul class="responsive-table">
       <li class="table-header">
@@ -54,6 +54,12 @@
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
+
+  <ion-card *ngIf="noSupplierFound">
+    <div class="d-flex justify-content-center text-align-center">
+      <img class="supplierNotFound" src='./assets/icon/not-found.png'>
+    </div>
+  </ion-card>
 
   <!-- <div #target>
     <ion-card>

@@ -25,9 +25,36 @@ export class EditProductModalPage implements OnInit {
   public pricePerUnit: number;
   public requirePrescription: boolean;
   public supplier: SupplierDto;
+  public suppliers: SupplierDto[];
   public supplierId: number;
   public supplierName: string;
   public submitted = false;
+  public errorMessages = {
+    productName: [
+      { type: 'required', message: '⚠ Product name is required' },
+    ],
+    dosage: [
+      { type: 'required', message: '⚠ Dosage is required' },
+    ],
+    box: [
+      { type: 'required', message: '⚠ Box is required' },
+    ],
+    unitsPerBox: [
+      { type: 'required', message: '⚠ Units per box is required' },
+    ],
+    pricePerBox: [
+      { type: 'required', message: '⚠ Price per box is required' },
+    ],
+    pricePerUnit: [
+      { type: 'required', message: '⚠ Price per unit is required' },
+    ],
+    requirePrescription: [
+      { type: 'required', message: '⚠ Require Prescription is required' },
+    ],
+    supplier: [
+      { type: 'required', message: '⚠ Supplier name is required' },
+    ],
+  };
 
   constructor(
     private modalController: ModalController,
@@ -39,7 +66,9 @@ export class EditProductModalPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.table(this.navParams);
+    this.apiService.getAllSuppliers().subscribe((data => {
+      this.suppliers = data;
+    }));
     this.productId = this.navParams.data.productId;
     this.productName = this.navParams.data.productName;
     this.description = this.navParams.data.description;
@@ -57,23 +86,59 @@ export class EditProductModalPage implements OnInit {
 
     this.editProductForm = this.formBuilder.group({
       productId: new FormControl(this.productId),
-      productName: new FormControl(this.productName),
+      productName: new FormControl(this.productName,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
       description: new FormControl(this.description),
-      dosage: new FormControl(this.dosage),
+      dosage: new FormControl(this.dosage,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
       category: new FormControl(this.category),
-      box: new FormControl(this.box),
-      unitsPerBox: new FormControl(this.unitsPerBox),
+      box: new FormControl(this.box,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      unitsPerBox: new FormControl(this.unitsPerBox,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
       unitsTotal: new FormControl(this.unitsTotal),
-      pricePerBox: new FormControl(this.pricePerBox),
-      pricePerUnit: new FormControl(this.pricePerUnit),
-      requirePrescription: new FormControl(this.requirePrescription),
-      supplier: this.formBuilder.group({
-        supplierId: new FormControl(this.supplierId),
-        supplierName: new FormControl(this.supplierName),
-      })
+      pricePerBox: new FormControl(this.pricePerBox,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      pricePerUnit: new FormControl(this.pricePerUnit,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      requirePrescription: new FormControl(JSON.stringify(this.requirePrescription),
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      supplier: new FormControl(this.supplier,
+        Validators.compose([
+          Validators.required
+        ])
+      )
+      // supplier: this.formBuilder.group({
+      //   supplierId: new FormControl(this.supplierId),
+      //   supplierName: new FormControl(this.supplierName),
+      // })
     });
   }
 
+  ionViewWillEnter() {
+
+  }
   // close modal
   closeModal() {
     this.modalController.dismiss();

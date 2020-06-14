@@ -9,6 +9,7 @@ export class EmittersService {
   @Output() public emitEditProductEventEmmiter = new EventEmitter<boolean>();
   @Output() public emitEditSupplierEventEmmiter = new EventEmitter<boolean>();
   @Output() public resetPOS = new EventEmitter<boolean>();
+  @Output() public resetOrderList = new EventEmitter<boolean>();
 
   constructor() { }
 }

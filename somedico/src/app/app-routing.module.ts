@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'edit-supplier-modal',
     loadChildren: () => import('./shared/modals/edit-supplier-modal/edit-supplier-modal.module').then( m => m.EditSupplierModalPageModule)
   },
+  {
+    path: 'warning-modal',
+    loadChildren: () => import('./shared/modals/warning-modal/warning-modal.module').then( m => m.WarningModalPageModule)
+  },
 ];
 
 @NgModule({

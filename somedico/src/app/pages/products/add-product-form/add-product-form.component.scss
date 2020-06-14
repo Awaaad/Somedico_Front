@@ -1,7 +1,10 @@
 @import '../../../shared/styles/common.scss';
 
 .remove-item {
-    padding-top: 22px;
+    padding-top: 15em;
+    @media only screen and (max-width: 1024px) {
+        padding-top: 20em;
+    }
 
     .delete-product-btn {
         font-size: 22px;
@@ -20,6 +23,14 @@
 //         color: blue !important;
 //     }
 // }
+.product-container {
+    display: flex;
+}
+.product-wrapper {
+    border-bottom: 2px solid $color-dark-green;
+    padding-right: 5px;
+    margin-bottom: 10px;
+}
 
 .action-button {
     float: right;

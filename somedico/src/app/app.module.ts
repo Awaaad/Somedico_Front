@@ -18,6 +18,7 @@ import { EditProductModalPageModule } from './shared/modals/edit-product-modal/e
 import { ConfirmationModalPageModule } from './shared/modals/confirmation-modal/confirmation-modal.module';
 import { DateFormatterPipe } from './services/pipes/date-formatter.pipe';
 import { EditSupplierModalPageModule } from './shared/modals/edit-supplier-modal/edit-supplier-modal.module';
+import { WarningModalPageModule } from './shared/modals/warning-modal/warning-modal.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EditSupplierModalPageModule } from './shared/modals/edit-supplier-modal
     HttpClientModule,
     EditProductModalPageModule,
     EditSupplierModalPageModule,
-    ConfirmationModalPageModule
+    ConfirmationModalPageModule,
+    WarningModalPageModule
   ],
   providers: [
     StatusBar,

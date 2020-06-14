@@ -50,6 +50,10 @@ export class ApiService {
   }
 
   // supplier
+  getAllSuppliers(): Observable<SupplierDto[]> {
+    return this.http.get<SupplierDto[]>(this.baseUrl + 'supplier/all');
+  }
+
   getAllSuppliersThroughFilter(supplierName: string, pageNumber: number, pageSize: number, sortOrder: string, sortBy: string): Observable<FilterSupplierListDto[] | any> {
     return this.http.get<FilterSupplierListDto[] | any>
       (this.baseUrl + 'supplier/filter/?supplierName=' + supplierName + '&cashierName=' + '&pageNumber=' + pageNumber + '&pageSize=' + pageSize + '&sortOrder=' + sortOrder + '&sortBy=' + sortBy);

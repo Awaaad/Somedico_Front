@@ -276,20 +276,21 @@ ion-button {
 }
 
 .edit-product-modal-container .modal-wrapper {
-    height: 80% !important;
+    height: 25.5em !important;
     position: absolute;
     display: block;
-    width: 50% !important;
+    width: 50em !important;
 
     @media only screen and (max-width: 600px) {
-        height: 100% !important;
-        width: 100% !important;
+        height: 25, 5em !important;
+        width: 50em !important;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
-        width: 85% !important;
+        width: 45em !important;
     }
 }
+
 .edit-supplier-modal-container .modal-wrapper {
     height: 24em !important;
     position: absolute;
@@ -323,8 +324,25 @@ ion-button {
     }
 }
 
+.warning-modal-container .modal-wrapper {
+    height: 12.5em !important;
+    width: 25em !important;
+    position: absolute;
+    display: block;
+
+    @media only screen and (max-width: 600px) {
+        height: 12.5em !important;
+        width: 25em !important;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        height: 12.5em !important;
+        width: 25em !important;
+    }
+}
+
 .modal-wrapper {
-    border-radius: 4px!important;
+    border-radius: 4px !important;
 }
 
 .toolbar-content {

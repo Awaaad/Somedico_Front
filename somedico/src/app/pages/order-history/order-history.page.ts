@@ -1,20 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController, IonInfiniteScroll, ToastController } from '@ionic/angular';
 import { OrderDto, FilterOrderListDto } from 'src/app/shared/models/models';
 import { UtilsService } from 'src/app/services/utils/utils.service';
 import { Router } from '@angular/router';
+import { WarningModalPage } from 'src/app/shared/modals/warning-modal/warning-modal.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order-history',
   templateUrl: './order-history.page.html',
   styleUrls: ['./order-history.page.scss'],
 })
-export class OrderHistoryPage implements OnInit {
+export class OrderHistoryPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
 
   public showFilter = false;
+  public noOrderHistoryFound = false;
   public orders: OrderDto[] = [];
   public page = 0;
   public totalPages = 0;
@@ -26,6 +29,8 @@ export class OrderHistoryPage implements OnInit {
   public cashierName = 'All';
   public date: string;
 
+  public refreshOrderListSubscription: Subscription;
+
   constructor(
     private apiService: ApiService,
     private emittersService: EmittersService,
@@ -36,13 +41,21 @@ export class OrderHistoryPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAllOrdersFromDB();
   }
 
   ionViewWillEnter() {
+    this.refreshOrderListSubscription = this.emittersService.resetOrderList.subscribe((refresh => {
+      if (refresh === true) {
+        this.successMsg();
+        this.getAllOrdersFromDB();
+      }
+    }));
     this.getAllOrdersFromDB();
   }
 
+  ngOnDestroy(): void {
+    this.refreshOrderListSubscription.unsubscribe();
+  }
   searchByCustomerName(customerName: string) {
     this.customerName = customerName;
     this.getAllOrdersFromDB();
@@ -68,11 +81,11 @@ export class OrderHistoryPage implements OnInit {
         this.totalPages = data.totalPages;
         this.totalOrders = this.totalOrders + data.totalElements;
 
-        // if (this.totalPages === 0) {
-        //   this.noProductsFound = true;
-        // } else {
-        //   this.noProductsFound = false;
-        // }
+        if (this.totalPages === 0) {
+          this.noOrderHistoryFound = true;
+        } else {
+          this.noOrderHistoryFound = false;
+        }
 
         if (event) {
           event.target.complete();
@@ -124,24 +137,15 @@ export class OrderHistoryPage implements OnInit {
 
   makePayment(order: OrderDto) {
     order.paid = true;
-    this.apiService.editOrderPayment(order).subscribe(
-      data => {
+    this.modalController.create({
+      component: WarningModalPage,
+      cssClass: 'warning-modal-container',
+      componentProps: {
+        order
       },
-      error => {
-      }
-    );
-    this.getAllOrdersFromDB();
+      backdropDismiss: false
+    }).then((modalElement) => {
+      modalElement.present();
+    });
   }
-
-  onSubmit() {
-    // this.submitted = true;
-    // if (this.editSupplierForm.invalid) {
-    //   this.unsuccessMsg();
-    // } else {
-    //   this.saveEditedSupplier();
-    //   this.closeModal();
-    //   this.successMsg();
-    // }
-  }
-
 }

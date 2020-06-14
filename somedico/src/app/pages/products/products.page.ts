@@ -48,7 +48,6 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     this.apiService.getProductById(productId).subscribe(
       data => {
         this.product = data;
-        console.log(this.product);
     });
     setTimeout(() => {
       this.modalController.create({
@@ -78,7 +77,6 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.submitAddProductFormSubscription = this.emittersService.emitAddProductEventEmmiter.subscribe(data => {
       this.refreshProductList = data;
-      console.log('submit', this.refreshProductList);
       if (this.refreshProductList === true) {
         this.products = [];
         this.getAllProductsFromDB();
@@ -86,7 +84,6 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     });
     this.submitEditProductFormSubscription = this.emittersService.emitEditProductEventEmmiter.subscribe(data => {
       this.refreshProductList = data;
-      console.log('submit', this.refreshProductList);
       if (this.refreshProductList === true) {
         this.products = [];
         this.getAllProductsFromDB();

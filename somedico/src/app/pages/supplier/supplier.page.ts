@@ -27,6 +27,7 @@ export class SupplierPage implements OnInit, OnDestroy {
   public supplierName = '';
   public cashierName = 'All';
   public refreshSupplierList = false;
+  public noSupplierFound = false;
 
   public submitEditSupplierFormSubscription: Subscription;
 
@@ -104,11 +105,11 @@ export class SupplierPage implements OnInit, OnDestroy {
         this.totalPages = data.totalPages;
         this.totalSuppliers = this.totalSuppliers + data.totalElements;
 
-        // if (this.totalPages === 0) {
-        //   this.noProductsFound = true;
-        // } else {
-        //   this.noProductsFound = false;
-        // }
+        if (this.totalPages === 0) {
+          this.noSupplierFound = true;
+        } else {
+          this.noSupplierFound = false;
+        }
 
         if (event) {
           event.target.complete();

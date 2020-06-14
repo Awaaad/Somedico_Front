@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="toolbar-content">
+      <div class="title">
+        <img class="header-logo" src='./assets/header_icons/alarm.png'>
+        <h3 class="header-nav-home">Warning</h3>
+      </div>
+      <div class="modal-close">
+        <button (click)="closeModal()" class="modal__close-btn ion-float-right">X</button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <h6>Are you sure you want to proceed with the payment?</h6>
+  <div class="action-button ion-text-right">
+    <ion-button (click)="onSubmit()" class="submit-btn" color="secondary">Yes</ion-button>
+    <ion-button (click)="closeModal()" class="add-product-btn" color="danger">No</ion-button>
+  </div>
+</ion-content>

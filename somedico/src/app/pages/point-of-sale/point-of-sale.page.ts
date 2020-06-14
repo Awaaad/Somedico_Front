@@ -128,9 +128,8 @@ export class PointOfSalePage implements OnInit, OnDestroy {
   public removeProductInCart(index: number): void {
     for (let i = 0; i < this.productsInCart.length; i++) {
       if (i === index) {
-        // console.log(this.productsInCart[i].productId);
         this.productsInCart.splice(i, 1);
-        // console.log('removedProuct', this.productsInCart);
+        this.orderProducts.splice(i, 1);
       }
     }
     this.calculateSubTotal();
@@ -154,7 +153,6 @@ export class PointOfSalePage implements OnInit, OnDestroy {
         this.removeProductInCart(index);
       }
     });
-    console.log(this.productsInCart);
     if (this.productsInCart.length === 0) {
       this.disableCompleteSaleButton = true;
     } else {
@@ -192,6 +190,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
     this.productName = '';
     this.showProductList = false;
     this.productsInCart = [];
+    this.orderProducts = [];
   }
 
   // successful message

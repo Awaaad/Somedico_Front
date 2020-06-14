@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ToastController } from '@ionic/angular';
@@ -12,6 +12,18 @@ import { ToastController } from '@ionic/angular';
 export class AddSupplierFormComponent implements OnInit {
   public addSupplierForm: FormGroup;
   public submitted = false;
+  public errorMessages = {
+    supplierName: [
+      { type: 'required', message: '⚠ Supplier name is required' },
+    ],
+    email: [
+      { type: 'pattern', message: '⚠ Invalid email address' },
+    ],
+    telephoneNumber: [
+      { type: 'required', message: '⚠ Contact number is required'},
+      { type: 'pattern', message: '⚠ Invalid contact number' }
+    ]
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,9 +42,23 @@ export class AddSupplierFormComponent implements OnInit {
 
   addSupplierFormGroup() {
     return this.formBuilder.group({
-      supplierName: new FormControl(''),
-      email: new FormControl(''),
-      telephoneNumber: new FormControl(''),
+
+      supplierName: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      email: new FormControl('',
+        Validators.compose([
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        ])
+      ),
+      telephoneNumber: new FormControl('',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]*$')
+        ])
+      ),
       address: new FormControl(''),
     });
   }
@@ -58,7 +84,6 @@ export class AddSupplierFormComponent implements OnInit {
       data => {
       },
       error => {
-        this.unsuccessMsg();
       }
     );
 
@@ -68,14 +93,11 @@ export class AddSupplierFormComponent implements OnInit {
 
     this.addSupplierForm.reset();
     (this.addSupplierForm.get('suppliers') as FormArray).clear();
-    // console.log(this.addSupplierForm.get('suppliers') as FormArray);
-    // console.log(this.addSupplierForm.get('suppliers') as FormArray);
-    // console.log(this.addSupplierForm.controls.suppliers.value);
   }
 
   async successMsg() {
     const toast = await this.toastCtrl.create({
-      message: 'Product(s) successfully added',
+      message: 'Supplier(s) successfully added',
       position: 'top',
       color: 'success',
       duration: 2000,

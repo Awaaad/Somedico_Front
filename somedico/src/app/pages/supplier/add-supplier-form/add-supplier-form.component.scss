@@ -2,6 +2,9 @@
 
 .remove-item {
     padding-top: 30px;
+    @media only screen and (max-width: 1024px) {
+        padding-top: 8em;
+    }
 
     .delete-product-btn {
         font-size: 22px;
@@ -20,6 +23,15 @@
 //         color: blue !important;
 //     }
 // }
+.supplier-container {
+    display: flex;
+}
+.supplier-wrapper {
+    border-bottom: 2px solid $color-dark-blue;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+}
 
 .action-button {
     float: right;

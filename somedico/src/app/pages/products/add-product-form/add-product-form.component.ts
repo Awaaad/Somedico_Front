@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ToastController } from '@ionic/angular';
+import { SupplierDto } from 'src/app/shared/models/models';
 
 @Component({
   selector: 'app-add-product-form',
@@ -12,6 +13,33 @@ import { ToastController } from '@ionic/angular';
 export class AddProductFormComponent implements OnInit {
   public addProductForm: FormGroup;
   public submitted = false;
+  public suppliers: SupplierDto[];
+  public errorMessages = {
+    productName: [
+      { type: 'required', message: '⚠ Product name is required' },
+    ],
+    dosage: [
+      { type: 'required', message: '⚠ Dosage is required' },
+    ],
+    box: [
+      { type: 'required', message: '⚠ Box is required' },
+    ],
+    unitsPerBox: [
+      { type: 'required', message: '⚠ Units per box is required' },
+    ],
+    pricePerBox: [
+      { type: 'required', message: '⚠ Price per box is required' },
+    ],
+    pricePerUnit: [
+      { type: 'required', message: '⚠ Price per unit is required' },
+    ],
+    requirePrescription: [
+      { type: 'required', message: '⚠ Require Prescription is required' },
+    ],
+    supplier: [
+      { type: 'required', message: '⚠ Supplier name is required' },
+    ],
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,25 +54,60 @@ export class AddProductFormComponent implements OnInit {
         this.addProductFormGroup()
       ])
     });
+
+    this.apiService.getAllSuppliers().subscribe((data => {
+      this.suppliers = data;
+    }));
   }
 
   addProductFormGroup() {
     return this.formBuilder.group({
-      productName: new FormControl(''),
+      productName: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
       description: new FormControl(''),
-      dosage: new FormControl(''),
+      dosage: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
       category: new FormControl(''),
-      box: new FormControl(''),
-      unitsPerBox: new FormControl(''),
+      box: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      unitsPerBox: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
       unitsTotal: new FormControl(''),
-      pricePerBox: new FormControl(''),
-      pricePerUnit: new FormControl(''),
-      requirePrescription: new FormControl(''),
-      // supplier: new FormControl('')
-      supplier: this.formBuilder.group({
-        supplierId: new FormControl(''),
-        supplierName: new FormControl(''),
-      })
+      pricePerBox: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      pricePerUnit: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      requirePrescription: new FormControl('false',
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      supplier: new FormControl('',
+        Validators.compose([
+          Validators.required
+        ])
+      )
+      // supplier: this.formBuilder.group({
+      //   supplier: new FormControl('')
+      // })
     });
   }
 
@@ -72,8 +135,7 @@ export class AddProductFormComponent implements OnInit {
       data => {
       },
       error => {
-        this.unsuccessMsg();
-      }
+      },
     );
 
     setTimeout(() => {
@@ -82,9 +144,6 @@ export class AddProductFormComponent implements OnInit {
 
     this.addProductForm.reset();
     (this.addProductForm.get('products') as FormArray).clear();
-    // console.log(this.addProductForm.get('products') as FormArray);
-    // console.log(this.addProductForm.get('products') as FormArray);
-    // console.log(this.addProductForm.controls.products.value);
   }
 
   async successMsg() {

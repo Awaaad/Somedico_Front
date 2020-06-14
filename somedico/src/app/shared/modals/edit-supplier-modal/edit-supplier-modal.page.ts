@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SupplierDto } from '../../models/models';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
@@ -19,6 +19,18 @@ export class EditSupplierModalPage implements OnInit {
   public telephoneNumber: number;
   public address: string;
   public submitted = false;
+  public errorMessages = {
+    supplierName: [
+      { type: 'required', message: '⚠ Supplier name is required' },
+    ],
+    email: [
+      { type: 'pattern', message: '⚠ Invalid email address' },
+    ],
+    telephoneNumber: [
+      { type: 'required', message: '⚠ Contact number is required' },
+      { type: 'pattern', message: '⚠ Invalid contact number' }
+    ]
+  };
 
   constructor(
     private modalController: ModalController,
@@ -38,9 +50,22 @@ export class EditSupplierModalPage implements OnInit {
 
     this.editSupplierForm = this.formBuilder.group({
       supplierId: new FormControl(this.supplier.supplierId),
-      supplierName: new FormControl(this.supplier.supplierName),
-      email: new FormControl(this.supplier.email),
-      telephoneNumber: new FormControl(this.supplier.telephoneNumber),
+      supplierName: new FormControl(this.supplier.supplierName,
+        Validators.compose([
+          Validators.required
+        ])
+      ),
+      email: new FormControl(this.supplier.email,
+        Validators.compose([
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        ])
+      ),
+      telephoneNumber: new FormControl(this.supplier.telephoneNumber,
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]*$')
+        ])
+      ),
       address: new FormControl(this.supplier.address)
     });
   }

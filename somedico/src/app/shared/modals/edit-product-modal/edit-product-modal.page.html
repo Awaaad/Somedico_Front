@@ -15,115 +15,147 @@
 <ion-content>
   <form [formGroup]="editProductForm">
     <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+      <ion-col size-lg="4" size-md="4" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Product Name</ion-label>
-          <ion-input formControlName="productName" type="text" value="{{productName}}"></ion-input>
+          <ion-input formControlName="productName" type="text" [value]="productName"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.productName">
+            <div class="error-message"
+              *ngIf="editProductForm.get('productName').hasError(error.type) && (editProductForm.get('productName').dirty || editProductForm.get('productName').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
 
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
-        <ion-item>
-          <ion-label position="stacked" color="medium">*Description</ion-label>
-          <ion-textarea formControlName="description" type="text" value="{{description}}"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+      <ion-col size-lg="4" size-md="4" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Dosage</ion-label>
           <ion-input formControlName="dosage" type="text" value="{{dosage}}"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.dosage">
+            <div class="error-message"
+              *ngIf="editProductForm.get('dosage').hasError(error.type) && (editProductForm.get('dosage').dirty || editProductForm.get('dosage').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+  
+      <ion-col size-lg="4" size-md="4" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Category</ion-label>
           <ion-input formControlName="category" type="text" value="{{category}}"></ion-input>
         </ion-item>
       </ion-col>
-    </ion-row>
 
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+      <ion-col size-lg="12" size-md="12" size-xs="12">
+        <ion-item>
+          <ion-label position="stacked" color="medium">*Description</ion-label>
+          <ion-textarea formControlName="description" type="text" value="{{description}}"></ion-textarea>
+        </ion-item>
+      </ion-col>
+  
+      <ion-col size-lg="3" size-md="3" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Box</ion-label>
           <ion-input formControlName="box" type="text" value="{{box}}"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.box">
+            <div class="error-message"
+              *ngIf="editProductForm.get('box').hasError(error.type) && (editProductForm.get('box').dirty || editProductForm.get('box').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+  
+      <ion-col size-lg="3" size-md="3" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Units Per Box</ion-label>
           <ion-input formControlName="unitsPerBox" type="text" value="{{unitsPerBox}}"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.unitsPerBox">
+            <div class="error-message"
+              *ngIf="editProductForm.get('unitsPerBox').hasError(error.type) && (editProductForm.get('unitsPerBox').dirty || editProductForm.get('unitsPerBox').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+  
+      <ion-col size-lg="3" size-md="3" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Price Per Box</ion-label>
           <ion-input formControlName="pricePerBox" type="text" value="{{pricePerBox}}"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.pricePerBox">
+            <div class="error-message"
+              *ngIf="editProductForm.get('pricePerBox').hasError(error.type) && (editProductForm.get('pricePerBox').dirty || editProductForm.get('pricePerBox').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+  
+      <ion-col size-lg="3" size-md="3" size-xs="12">
         <ion-item>
           <ion-label position="stacked" color="medium">*Price Per Unit</ion-label>
           <ion-input formControlName="pricePerUnit" type="text" value="{{pricePerUnit}}"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.pricePerUnit">
+            <div class="error-message"
+              *ngIf="editProductForm.get('pricePerUnit').hasError(error.type) && (editProductForm.get('pricePerUnit').dirty || editProductForm.get('pricePerUnit').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col col-md-12 size="12" size-sm>
+  
+      <ion-col size-lg="6" size-md="6" size-xs="12">
         <ion-item>
-          <ion-label position="stacked" color="medium">*Require Prescription</ion-label>
-          <ion-input formControlName="requirePrescription" type="text" value="{{requirePrescription}}"></ion-input>
+          <ion-label position="floating" color="medium">Require prescription</ion-label>
+          <ion-select interface="popover" class="ion-float-left" formControlName="requirePrescription">
+            <ion-select-option value="false" color="secondary">No</ion-select-option>
+            <ion-select-option value="true" color="secondary">Yes</ion-select-option>
+          </ion-select>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.requirePrescription">
+            <div class="error-message"
+              *ngIf="editProductForm.get('requirePrescription').hasError(error.type) && (editProductForm.get('requirePrescription').dirty || editProductForm.get('requirePrescription').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
-    </ion-row>
-
-    <ion-row formGroupName="supplier">
-      <ion-col col-md-12 size="12" size-sm>
+  
+      <ion-col size-lg="6" size-md="6" size-xs="12">
         <ion-item>
-          <ion-label position="stacked" color="medium">*Supplier Id</ion-label>
-          <ion-input formControlName="supplierId" type="number" value="{{supplierId}}"></ion-input>
+          <ion-label position="floating" color="medium">Supplier name</ion-label>
+          <ion-select interface="popover" formControlName="supplier" cancelText="Cancel" okText="OK">
+            <ion-select-option *ngFor="let supplier of suppliers" [value]="supplier" color="secondary">{{ supplier.supplierName }}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.supplier">
+            <div class="error-message"
+              *ngIf="editProductForm.get('supplier').hasError(error.type) && (editProductForm.get('supplier').dirty || editProductForm.get('supplier').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
 
-      <!-- <div class="error-messages">
-            <ng-container *ngFor="let error of errorMessages.skillName">
-              <div class="error-message"
-                *ngIf="formAddSkill.get('skillName').hasError(error.type) && (formAddSkill.get('skillName').dirty || formAddSkill.get('skillName').touched)">
-                {{ error.message }}
-              </div>
-            </ng-container>
-          </div> -->
-    </ion-row>
-
-    <!-- <div class="option-button ion-text-right">
-        <ion-button class="cancel-btn" (click)="closeModal()" type="submit" color="danger">Cancel</ion-button>
-        <ion-button class='btn' color="dark">Save</ion-button>
-      </div> -->
+  </ion-row>
     <div class="action-button ion-text-right">
       <ion-button (click)="closeModal()" class="add-product-btn" color="danger">Cancel</ion-button>
       <ion-button (click)="onSubmit()" class="submit-btn" color="secondary">Save</ion-button>

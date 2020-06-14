@@ -20,6 +20,14 @@
           <ion-label position="floating" color="medium">*Supplier Name</ion-label>
           <ion-input formControlName="supplierName" type="text" [value]="supplierName"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.supplierName">
+            <div class="error-message"
+              *ngIf="editSupplierForm.get('supplierName').hasError(error.type) && (editSupplierForm.get('supplierName').dirty || editSupplierForm.get('supplierName').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -28,6 +36,14 @@
           <ion-label position="floating" color="medium">*Email Address</ion-label>
           <ion-input formControlName="email" type="text" [value]="email"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.email">
+            <div class="error-message"
+              *ngIf="editSupplierForm.get('email').hasError(error.type) && (editSupplierForm.get('email').dirty || editSupplierForm.get('email').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -36,6 +52,14 @@
           <ion-label position="floating" color="medium">*Telephone Number</ion-label>
           <ion-input formControlName="telephoneNumber" type="text" [value]="telephoneNumber"></ion-input>
         </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of errorMessages.telephoneNumber">
+            <div class="error-message"
+              *ngIf="editSupplierForm.get('telephoneNumber').hasError(error.type) && (editSupplierForm.get('telephoneNumber').dirty || editSupplierForm.get('telephoneNumber').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
