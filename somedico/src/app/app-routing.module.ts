@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'warning-modal',
     loadChildren: () => import('./shared/modals/warning-modal/warning-modal.module').then( m => m.WarningModalPageModule)
   },
+  {
+    path: 'stock-update',
+    loadChildren: () => import('./pages/stock-update/stock-update.module').then( m => m.StockUpdatePageModule)
+  },
 ];
 
 @NgModule({

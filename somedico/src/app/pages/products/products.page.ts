@@ -41,6 +41,10 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+
+  }
+
+  ionViewWillEnter() {
     this.getAllProductsFromDB();
   }
 
@@ -112,6 +116,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
     this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterProductListDto) => {
         this.products = [...this.products, ...data.productDtos];
+        console.log(this.products)
 
         this.totalPages = data.totalPages;
         this.totalProducts = this.totalProducts + data.totalElements;
