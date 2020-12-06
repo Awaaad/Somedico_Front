@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ToastController } from '@ionic/angular';
 import { SupplierDto } from 'src/app/shared/models/models';
+import { ProductApiService } from 'src/app/services/api/product-api/product.api.service';
+import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 
 @Component({
   selector: 'app-add-product-form',
@@ -43,7 +44,8 @@ export class AddProductFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private productApiService: ProductApiService,
+    private supplierApiService: SupplierApiService,
     private emittersService: EmittersService,
     private toastCtrl: ToastController,
   ) { }
@@ -55,7 +57,7 @@ export class AddProductFormComponent implements OnInit {
       ])
     });
 
-    this.apiService.getAllSuppliers().subscribe((data => {
+    this.supplierApiService.getAllSuppliers().subscribe((data => {
       this.suppliers = data;
     }));
   }
@@ -131,7 +133,7 @@ export class AddProductFormComponent implements OnInit {
       product.unitsTotal = product.unitsPerBox * product.box;
     });
     console.log(this.addProductForm.controls.products.value);
-    this.apiService.saveAllProducts(products).subscribe(
+    this.productApiService.saveAllProducts(products).subscribe(
       data => {
       },
       error => {

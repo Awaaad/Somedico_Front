@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { isNumber } from 'util';
 import { ProductDto, FilterProductListDto, OrderProductDto } from 'src/app/shared/models/models';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ConfirmationModalPage } from 'src/app/shared/modals/confirmation-modal/confirmation-modal.page';
 import { Subscription } from 'rxjs';
+import { ProductApiService } from 'src/app/services/api/product-api/product.api.service';
 
 @Component({
   selector: 'app-point-of-sale',
@@ -51,7 +51,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
   public refreshPOSSubscription: Subscription;
 
   constructor(
-    private apiService: ApiService,
+    private productApiService: ProductApiService,
     private emittersService: EmittersService,
     private modalController: ModalController,
     private toastCtrl: ToastController,
@@ -83,7 +83,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
     } else {
       this.showProductList = true;
       this.products = [];
-      this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
+      this.productApiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
         (data = FilterProductListDto) => {
           this.products = [...this.products, ...data.productDtos];
 
@@ -102,7 +102,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
 
   public addProductToCart(productId: number): void {
     this.disableCompleteSaleButton = false;
-    this.apiService.getProductById(productId).subscribe(
+    this.productApiService.getProductById(productId).subscribe(
       (data = ProductDto) => {
         this.productsInCart.push(data);
         this.orderProducts.push({
@@ -147,7 +147,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
     this.productsInCart.forEach((product, index) => {
       this.orderProducts[index].productName = this.productsInCart[index].productName;
       this.orderProducts[index].boxesOrdered = this.productsInCart[index].boxesOrdered;
-      this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox ) + this.productsInCart[index].unitsOrdered;
+      this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox) + this.productsInCart[index].unitsOrdered;
       this.orderProducts[index].totalPrice = this.productsInCart[index].total;
       if (this.orderProducts[index].unitsOrdered === 0) {
         this.removeProductInCart(index);
@@ -164,7 +164,7 @@ export class PointOfSalePage implements OnInit, OnDestroy {
     this.productsInCart.forEach((product, index) => {
       this.orderProducts[index].productName = this.productsInCart[index].productName;
       this.orderProducts[index].boxesOrdered = this.productsInCart[index].boxesOrdered;
-      this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox ) + this.productsInCart[index].unitsOrdered;
+      this.orderProducts[index].unitsOrdered = (this.productsInCart[index].boxesOrdered * this.productsInCart[index].unitsPerBox) + this.productsInCart[index].unitsOrdered;
       this.orderProducts[index].totalPrice = this.productsInCart[index].total;
       if (this.orderProducts[index].unitsOrdered === 0) {
         this.removeProductInCart(index);

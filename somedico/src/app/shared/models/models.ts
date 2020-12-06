@@ -81,3 +81,21 @@ export class OrderProductDto {
     unitsOrdered: number;
     totalPrice: number;
 }
+
+export class ProductQuantityPriceDto {
+    productName: string;
+    boxesOrdered: number;
+    unitsOrdered: number;
+    price: number;
+    pricePerBox: number;
+    pricePerUnit: number;
+    unitsPerBox: number;
+}
+export class CustomerReceiptDto {
+    orderId: number;
+    cashierName: string;
+    customerName: string;
+    orderDate: Date;
+    totalPrice: number;
+    productQuantityPriceDto: ProductQuantityPriceDto[];
+}

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ModalController, IonInfiniteScroll, ToastController } from '@ionic/angular';
 import { OrderDto, FilterOrderListDto } from 'src/app/shared/models/models';
-import { UtilsService } from 'src/app/services/utils/utils.service';
 import { Router } from '@angular/router';
 import { WarningModalPage } from 'src/app/shared/modals/warning-modal/warning-modal.page';
 import { Subscription } from 'rxjs';
+import { OrderApiService } from 'src/app/services/api/order-api/order.api.service';
 
 @Component({
   selector: 'app-order-history',
@@ -32,10 +31,9 @@ export class OrderHistoryPage implements OnInit, OnDestroy {
   public refreshOrderListSubscription: Subscription;
 
   constructor(
-    private apiService: ApiService,
+    private orderApiService: OrderApiService,
     private emittersService: EmittersService,
     private modalController: ModalController,
-    private utilsService: UtilsService,
     private toastCtrl: ToastController,
     private router: Router
   ) { }
@@ -75,7 +73,7 @@ export class OrderHistoryPage implements OnInit, OnDestroy {
       this.orders = [];
       this.totalOrders = 0;
     }
-    this.apiService.getAllOrdersThroughFilter(this.customerName, this.cashierName, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
+    this.orderApiService.getAllOrdersThroughFilter(this.customerName, this.cashierName, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterOrderListDto) => {
         this.orders = [...this.orders, ...data.orderDtos];
         this.totalPages = data.totalPages;
@@ -135,17 +133,25 @@ export class OrderHistoryPage implements OnInit, OnDestroy {
     toast.present();
   }
 
-  makePayment(order: OrderDto) {
-    order.paid = true;
-    this.modalController.create({
-      component: WarningModalPage,
-      cssClass: 'warning-modal-container',
-      componentProps: {
-        order
-      },
-      backdropDismiss: false
-    }).then((modalElement) => {
-      modalElement.present();
+  async makePayment(order: OrderDto) {
+    const modal: HTMLIonModalElement =
+      await this.modalController.create({
+        component: WarningModalPage,
+        cssClass: 'warning-modal-container',
+        componentProps: {
+          order
+        },
+        backdropDismiss: false
+      });
+
+    modal.onDidDismiss().then((data) => {
+      if (data.data === true) {
+        order.paid = true;
+      } else {
+        order.paid = false;
+      }
     });
+
+    await modal.present();
   }
 }

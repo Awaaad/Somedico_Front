@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { SupplierDto } from '../../models/models';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
+import { ProductApiService } from 'src/app/services/api/product-api/product.api.service';
+import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 
 @Component({
   selector: 'app-edit-product-modal',
@@ -61,12 +62,13 @@ export class EditProductModalPage implements OnInit {
     private toastCtrl: ToastController,
     private navParams: NavParams,
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private productApiService: ProductApiService,
+    private supplierApiService: SupplierApiService,
     private emittersService: EmittersService
   ) { }
 
   ngOnInit() {
-    this.apiService.getAllSuppliers().subscribe((data => {
+    this.supplierApiService.getAllSuppliers().subscribe((data => {
       this.suppliers = data;
     }));
     this.productId = this.navParams.data.productId;
@@ -168,7 +170,7 @@ export class EditProductModalPage implements OnInit {
   }
 
   saveEditedProduct() {
-    this.apiService.editProduct(this.editProductForm.value).subscribe(
+    this.productApiService.editProduct(this.editProductForm.value).subscribe(
       data => {
       },
       error => {

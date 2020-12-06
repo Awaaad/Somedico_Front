@@ -26,20 +26,20 @@
           <div>
             <div class="address main">La Caverne, Vacoas</div>
             <div class="tel main">(+230) 6977114</div>
-  
+
           </div>
         </div>
         <div class="invoice-subtitle">
           <div>
-            <div class="cashier-name main">Cashier: <span class="sub">Awad</span></div>
-            <div class="cashier-name main">Customer: <span class="sub">{{customerName}}</span></div>
+            <div class="cashier-name main">Cashier: <span class="sub">{{orderDetails?.cashierName}}</span></div>
+            <div class="cashier-name main">Customer: <span class="sub">{{orderDetails?.customerName}}</span></div>
           </div>
           <div>
             <div class="invoice-date-title main">Invoice Date:</div>
-            <div class="invoice-date sub">{{orderDate | DateFormatter}}</div>
+            <div class="invoice-date sub">{{orderDetails?.orderDate | DateFormatter}}</div>
           </div>
         </div>
-  
+
         <ul class="responsive-table">
           <li class="table-header">
             <div class="col col-1">Product Name</div>
@@ -49,23 +49,24 @@
             <div class="col col-5">Price Per Unit</div>
             <div class="col col-6">Total</div>
           </li>
-          <li class="table-row" *ngFor="let orderDetail of orderDetails" > 
-            <div class="col col-1" data-label="Product Name">{{orderDetail.productName}}</div>
-            <div class="col col-2" data-label="Box(es)">{{orderDetail.boxesOrdered}}</div>
-            <div class="col col-3" data-label="Unit(s)">{{orderDetail.unitsOrdered}}</div>
-            <div class="col col-4" data-label="Price Per Box">Rs {{orderDetail.productDto.pricePerBox}}</div>
-            <div class="col col-5" data-label="Price Per Unit">Rs {{orderDetail.productDto.pricePerUnit}}</div>
-            <div class="col col-6" data-label="Total">Rs {{orderDetail.totalPrice}}</div>
+          <li class="table-row" *ngFor="let productQuantityPriceDetail of orderDetails?.productQuantityPriceDto">
+            <div class="col col-1" data-label="Product Name">{{productQuantityPriceDetail?.productName}}</div>
+            <div class="col col-2" data-label="Box(es)">{{productQuantityPriceDetail?.boxesOrdered}}</div>
+            <div class="col col-3" data-label="Unit(s)">
+              {{productQuantityPriceDetail?.unitsOrdered % productQuantityPriceDetail.unitsPerBox}}</div>
+            <div class="col col-4" data-label="Price Per Box">Rs {{productQuantityPriceDetail?.pricePerBox}}</div>
+            <div class="col col-5" data-label="Price Per Unit">Rs {{productQuantityPriceDetail?.pricePerUnit}}</div>
+            <div class="col col-6" data-label="Total">Rs {{productQuantityPriceDetail?.price}}</div>
           </li>
         </ul>
-  
+
         <div class="invoice-footer">
           <div>
             <div class="sub">Thank you for your purchase</div>
             <div class="sub">© Somedico Pharmacy</div>
           </div>
           <div>
-            <div class="invoice-date-title main">Grand Total: Rs {{grandTotal}}</div>
+            <div class="invoice-date-title main">Grand Total: Rs {{orderDetails?.totalPrice}}</div>
           </div>
         </div>
       </ion-card-content>

@@ -62,7 +62,9 @@
         <div class="pt-1 col col-10" data-label="Require Prescription">{{product.requirePrescription? 'Yes':'No'}}</div>
         <div class="pt-1 col col-11" data-label="Supplier">{{product.supplier.supplierName}}</div>
         <div class="col col-12" data-label="Edit" (click)="addProductToCart(product.productId)">
-          <ion-button round class="add-productCart" color="danger"><ion-icon class="addToCart-icon" name="add"></ion-icon></ion-button>
+          <ion-button round class="add-productCart" color="danger">
+            <ion-icon class="addToCart-icon" name="add"></ion-icon>
+          </ion-button>
         </div>
       </li>
     </ul>
@@ -98,8 +100,8 @@
             <td data-th="Boxes">{{productInCart.box}}</td>
             <td data-th="PriceBox">Rs {{productInCart.pricePerBox}}</td>
             <td data-th="Box">
-              <input class="input-number" type="number" [max]="productInCart.box" [(ngModel)]="productInCart.boxesOrdered"
-                (ngModelChange)="calculateSubTotal()">
+              <input class="input-number" type="number" [max]="productInCart.box"
+                [(ngModel)]="productInCart.boxesOrdered" (ngModelChange)="calculateSubTotal()">
             </td>
             <td data-th="Units">{{productInCart.unitsPerBox}}</td>
             <td data-th="PriceUnit">Rs {{productInCart.pricePerUnit}}</td>
@@ -142,7 +144,7 @@
     <ion-col size="6">
       <!-- calculator -->
       <ion-row class="calculator-row">
-        <ion-col size="8">
+        <ion-col size="8" size-lg size="12" size-md>
           <ion-card class="quick-balance">
             <ion-card-content>
               <h3>Paid:<input class="input-number balance calculator-paid" type="number" [(ngModel)]="paid"></h3>
@@ -151,7 +153,7 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <ion-col size="4">
+        <ion-col size="4" size-lg size="12" size-md>
           <ion-card class="calculator">
             <ion-card-content>
               <ion-item>

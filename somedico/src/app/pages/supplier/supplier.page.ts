@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SupplierDto, FilterSupplierListDto } from 'src/app/shared/models/models';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { Router } from '@angular/router';
 import { EditSupplierModalPage } from 'src/app/shared/modals/edit-supplier-modal/edit-supplier-modal.page';
 import { Subscription } from 'rxjs';
+import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 
 @Component({
   selector: 'app-supplier',
@@ -32,7 +32,7 @@ export class SupplierPage implements OnInit, OnDestroy {
   public submitEditSupplierFormSubscription: Subscription;
 
   constructor(
-    private apiService: ApiService,
+    private supplierApiService: SupplierApiService,
     private emittersService: EmittersService,
     private modalController: ModalController,
     private router: Router
@@ -57,14 +57,14 @@ export class SupplierPage implements OnInit, OnDestroy {
   }
 
   scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
+    el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   }
 
   openEditModal(supplierId: number) {
-    this.apiService.getSupplierById(supplierId).subscribe(
+    this.supplierApiService.getSupplierById(supplierId).subscribe(
       data => {
         this.supplier = data;
-    });
+      });
     setTimeout(() => {
       this.modalController.create({
         component: EditSupplierModalPage,
@@ -97,7 +97,7 @@ export class SupplierPage implements OnInit, OnDestroy {
       this.suppliers = [];
       this.totalSuppliers = 0;
     }
-    this.apiService.getAllSuppliersThroughFilter(this.supplierName, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
+    this.supplierApiService.getAllSuppliersThroughFilter(this.supplierName, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterSupplierListDto) => {
         console.log(data);
         this.suppliers = [...this.suppliers, ...data.supplierDtos];

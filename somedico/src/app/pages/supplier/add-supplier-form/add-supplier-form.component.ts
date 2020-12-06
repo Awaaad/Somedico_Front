@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { ToastController } from '@ionic/angular';
+import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 
 @Component({
   selector: 'app-add-supplier-form',
@@ -20,14 +20,14 @@ export class AddSupplierFormComponent implements OnInit {
       { type: 'pattern', message: '⚠ Invalid email address' },
     ],
     telephoneNumber: [
-      { type: 'required', message: '⚠ Contact number is required'},
+      { type: 'required', message: '⚠ Contact number is required' },
       { type: 'pattern', message: '⚠ Invalid contact number' }
     ]
   };
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private supplierApiService: SupplierApiService,
     private emittersService: EmittersService,
     private toastCtrl: ToastController,
   ) { }
@@ -80,7 +80,7 @@ export class AddSupplierFormComponent implements OnInit {
       supplierDtos: this.addSupplierForm.controls.suppliers.value
     };
     console.log(this.addSupplierForm.controls.suppliers.value);
-    this.apiService.saveAllSuppliers(suppliers).subscribe(
+    this.supplierApiService.saveAllSuppliers(suppliers).subscribe(
       data => {
       },
       error => {

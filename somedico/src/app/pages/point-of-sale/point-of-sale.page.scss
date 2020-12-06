@@ -95,7 +95,6 @@ td.add {
 .calculator {
     width: 300px;
     float: right;
-    margin: 0;
 }
 
 .calculators-wrapper {
@@ -103,7 +102,7 @@ td.add {
 }
 
 .quick-balance {
-    margin: 0;
+    margin-bottom: 10px;
 
     ion-card-content {
         h3 {
@@ -284,4 +283,8 @@ h2 {
 
   .pt-1{
       padding-top: 15px;
+  }
+
+  .calculator-row {
+      display: block;
   }

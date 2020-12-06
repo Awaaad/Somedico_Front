@@ -65,11 +65,12 @@
         <div class="col col-6">Paid</div>
         <div class="col col-7"></div>
       </li>
-      <li class="table-row" *ngFor="let order of orders"> 
+      <li class="table-row" *ngFor="let order of orders">
         <div class="col col-1" data-label="Order Id" (click)="routeTo(order.orderId)">{{order.orderId}}</div>
         <div class="col col-2" data-label="Customer Name" (click)="routeTo(order.orderId)">{{order.customerName}}</div>
         <div class="col col-3" data-label="Cashier Name" (click)="routeTo(order.orderId)">{{order.cashierName}}</div>
-        <div class="col col-4" data-label="Order Date" (click)="routeTo(order.orderId)">{{order.orderDate | DateFormatter}}</div>
+        <div class="col col-4" data-label="Order Date" (click)="routeTo(order.orderId)">
+          {{order.orderDate | DateFormatter}}</div>
         <div class="col col-5" data-label="Amount" (click)="routeTo(order.orderId)">{{order.totalPrice}}</div>
         <div *ngIf="order.paid === true" class="col col-6" data-label="Paid" (click)="routeTo(order.orderId)">
           <img class="logo" src='./assets/icon/paid.png'>
@@ -85,7 +86,7 @@
       </li>
     </ul>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more products...">
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more orders...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 

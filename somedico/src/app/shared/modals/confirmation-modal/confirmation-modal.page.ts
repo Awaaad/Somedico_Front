@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { OrderProductDto } from '../../models/models';
+import { OrderApiService } from 'src/app/services/api/order-api/order.api.service';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -18,10 +18,9 @@ export class ConfirmationModalPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private toastCtrl: ToastController,
     private navParams: NavParams,
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private orderApiService: OrderApiService,
     private emittersService: EmittersService
   ) { }
 
@@ -55,7 +54,7 @@ export class ConfirmationModalPage implements OnInit {
       orderProductDtos: this.orderProducts,
       totalPrice: this.navParams.data.totalPrice
     };
-    this.apiService.saveOrder(order).subscribe(
+    this.orderApiService.saveOrder(order).subscribe(
       data => {
         this.modalController.dismiss();
       },

@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
 import { Subscription } from 'rxjs';
 import { FilterProductListDto, ProductDto } from 'src/app/shared/models/models';
-import { IonInfiniteScroll, ToastController, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { EditProductModalPage } from '../../shared/modals/edit-product-modal/edit-product-modal.page';
 import { Router } from '@angular/router';
+import { ProductApiService } from 'src/app/services/api/product-api/product.api.service';
 
 @Component({
   selector: 'app-products',
@@ -34,7 +34,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   private submitAddProductFormSubscription: Subscription;
   private submitEditProductFormSubscription: Subscription;
   constructor(
-    private apiService: ApiService,
+    private productApiService: ProductApiService,
     private emittersService: EmittersService,
     private modalController: ModalController,
     private router: Router
@@ -49,10 +49,10 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openEditModal(productId: number) {
-    this.apiService.getProductById(productId).subscribe(
+    this.productApiService.getProductById(productId).subscribe(
       data => {
         this.product = data;
-    });
+      });
     setTimeout(() => {
       this.modalController.create({
         component: EditProductModalPage,
@@ -100,7 +100,7 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scroll(el: HTMLElement) {
-    el.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
+    el.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   }
 
   toggleInfiniteScroll() {
@@ -113,10 +113,9 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
       this.products = [];
       this.totalProducts = 0;
     }
-    this.apiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
+    this.productApiService.getAllProductThroughFilter(this.productName, this.supplierName, this.category, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterProductListDto) => {
         this.products = [...this.products, ...data.productDtos];
-        console.log(this.products)
 
         this.totalPages = data.totalPages;
         this.totalProducts = this.totalProducts + data.totalElements;

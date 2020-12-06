@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SupplierDto } from '../../models/models';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
-import { ApiService } from 'src/app/services/api.service';
 import { EmittersService } from 'src/app/services/emitters.service';
+import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 
 @Component({
   selector: 'app-edit-supplier-modal',
@@ -37,7 +37,7 @@ export class EditSupplierModalPage implements OnInit {
     private toastCtrl: ToastController,
     private navParams: NavParams,
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
+    private supplierApiService: SupplierApiService,
     private emittersService: EmittersService
   ) { }
 
@@ -98,7 +98,7 @@ export class EditSupplierModalPage implements OnInit {
   }
 
   saveEditedSupplier() {
-    this.apiService.editSupplier(this.editSupplierForm.value).subscribe(
+    this.supplierApiService.editSupplier(this.editSupplierForm.value).subscribe(
       data => {
       },
       error => {
