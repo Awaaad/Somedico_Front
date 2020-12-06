@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { Subscription } from 'rxjs';
 import { FilterProductListDto, ProductDto } from 'src/app/shared/models/models';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
@@ -148,13 +148,11 @@ export class ProductsPage implements OnInit, AfterViewInit, OnDestroy {
   filterBySupplierName(event) {
     this.supplierName = event.target.value;
     this.getAllProductsFromDB();
-    // console.log();
   }
 
   filterByCategory(event) {
     this.category = event.target.value;
     this.getAllProductsFromDB();
-    // console.log();
   }
 
 

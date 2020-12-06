@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { ModalController, IonInfiniteScroll, ToastController } from '@ionic/angular';
 import { OrderDto, FilterOrderListDto } from 'src/app/shared/models/models';
 import { Router } from '@angular/router';
@@ -110,6 +110,7 @@ export class OrderHistoryPage implements OnInit, OnDestroy {
     this.router.navigate(['/order-details', orderId]);
   }
 
+  // successful message
   async successMsg() {
     const toast = await this.toastCtrl.create({
       message: 'Payment successfully made',

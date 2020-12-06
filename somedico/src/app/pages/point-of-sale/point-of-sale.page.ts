@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { isNumber } from 'util';
 import { ProductDto, FilterProductListDto, OrderProductDto } from 'src/app/shared/models/models';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ConfirmationModalPage } from 'src/app/shared/modals/confirmation-modal/confirmation-modal.page';
 import { Subscription } from 'rxjs';

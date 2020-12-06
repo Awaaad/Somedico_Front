@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { SupplierDto } from '../../models/models';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { ProductApiService } from 'src/app/services/api/product-api/product.api.service';
 import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { OrderProductDto } from '../../models/models';
 import { OrderApiService } from 'src/app/services/api/order-api/order.api.service';
 
@@ -37,7 +37,6 @@ export class ConfirmationModalPage implements OnInit {
       customerName: new FormControl(''),
       paid: new FormControl()
     });
-    console.log(this.orderProducts);
   }
 
   // close modal

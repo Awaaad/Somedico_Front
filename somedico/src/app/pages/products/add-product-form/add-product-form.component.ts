@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { ToastController } from '@ionic/angular';
 import { SupplierDto } from 'src/app/shared/models/models';
 import { ProductApiService } from 'src/app/services/api/product-api/product.api.service';
@@ -132,7 +132,6 @@ export class AddProductFormComponent implements OnInit {
     this.addProductForm.controls.products.value.forEach(product => {
       product.unitsTotal = product.unitsPerBox * product.box;
     });
-    console.log(this.addProductForm.controls.products.value);
     this.productApiService.saveAllProducts(products).subscribe(
       data => {
       },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { ToastController } from '@ionic/angular';
 import { SupplierApiService } from 'src/app/services/api/supplier-api/supplier.api.service';
 
@@ -79,7 +79,6 @@ export class AddSupplierFormComponent implements OnInit {
     const suppliers = {
       supplierDtos: this.addSupplierForm.controls.suppliers.value
     };
-    console.log(this.addSupplierForm.controls.suppliers.value);
     this.supplierApiService.saveAllSuppliers(suppliers).subscribe(
       data => {
       },

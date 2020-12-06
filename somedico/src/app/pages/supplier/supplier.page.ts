@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SupplierDto, FilterSupplierListDto } from 'src/app/shared/models/models';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { EmittersService } from 'src/app/services/emitters.service';
+import { EmittersService } from 'src/app/services/emitters/emitters.service';
 import { Router } from '@angular/router';
 import { EditSupplierModalPage } from 'src/app/shared/modals/edit-supplier-modal/edit-supplier-modal.page';
 import { Subscription } from 'rxjs';
@@ -99,7 +99,6 @@ export class SupplierPage implements OnInit, OnDestroy {
     }
     this.supplierApiService.getAllSuppliersThroughFilter(this.supplierName, this.page, this.limit, this.sortOrder, this.sortBy).subscribe(
       (data = FilterSupplierListDto) => {
-        console.log(data);
         this.suppliers = [...this.suppliers, ...data.supplierDtos];
 
         this.totalPages = data.totalPages;
