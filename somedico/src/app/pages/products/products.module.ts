@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ProductsPageRoutingModule } from './products-routing.module';
 import { ProductsPage } from './products.page';
-import { AddProductFormComponent } from './add-product-form/add-product-form.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   imports: [
@@ -12,10 +12,11 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
     FormsModule,
     IonicModule,
     ProductsPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSliderModule
   ],
   declarations: [
     ProductsPage,
   ]
 })
-export class ProductsPageModule {}
+export class ProductsPageModule { }

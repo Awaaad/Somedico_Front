@@ -99,3 +99,7 @@ export class CustomerReceiptDto {
     totalPrice: number;
     productQuantityPriceDto: ProductQuantityPriceDto[];
 }
+
+export class EODSalesAmountDto {
+    totalAmount: number;
+}

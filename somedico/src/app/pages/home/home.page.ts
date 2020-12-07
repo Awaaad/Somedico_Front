@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import * as Chart from 'chart.js';
+import { OrderApiService } from 'src/app/services/api/order-api/order.api.service';
 
 
 @Component({
@@ -36,14 +37,25 @@ export class HomePage implements OnInit, OnDestroy {
   public value4Value: number;
   public value5Value: number;
 
-  constructor() { }
+  constructor(
+    private orderApiService: OrderApiService
+  ) { }
 
   ngOnInit() {
     this.initialiseChart();
+    this.getEODSalesAmount();
   }
 
   ngOnDestroy() {
     this.doughnut.destroy();
+  }
+
+  private getEODSalesAmount(): void {
+    const date: Date = new Date();
+    const isoDate = date.toISOString();
+    this.orderApiService.getEODSalesAmount(isoDate).subscribe(data => {
+      console.log(data);
+    })
   }
 
   initialiseChart() {
